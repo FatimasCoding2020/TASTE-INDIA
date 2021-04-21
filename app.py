@@ -1,8 +1,10 @@
+import os
 from flask import (
     Flask,
+    render_template,
 )
 
-import os
+from database import db
 
 
 
@@ -10,7 +12,9 @@ app = Flask(__name__)
 
 
 
-
+app.secret_key = os.getenv("SECRET_KEY")
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+IMAGE_DIR = os.path.join(APP_ROOT, "static/uploaded_images")
 
 
 
@@ -20,7 +24,7 @@ app = Flask(__name__)
 def home():
     
 
-    return "Hello there"
+    return render_template("index.html")
 
 
 
