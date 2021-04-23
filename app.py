@@ -149,5 +149,16 @@ def profile():
         print("error----------------------------------", e)
 
 
+@app.route("/logout")
+def logout():
+    try:
+        # expering token for logout
+        resp = make_response(redirect(url_for("login")))
+        resp.set_cookie("logintoken", expires=0)
+        return resp
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
