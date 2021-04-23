@@ -128,5 +128,26 @@ def login():
         return render_template("error_handlers/error.html")
 
 
+@app.route("/profile")
+def profile():
+    try:
+        login_data = login_authorize(request, db)
+        # print(login_data)
+        # if login is unsuccessfull redirecting to login page again
+        if not login_data["success"]:
+            return redirect(url_for("login"))
+
+        payload_filter = {"userId": login_data["_id"]}
+        response = all_recipe_controller(
+            payload_filter, db_conn=db, host_url=request.host_url)
+        print("response---", response)
+        return render_template(
+            "users/myaccount.html",
+            name=login_data["name"],
+            result=response)
+    except Exception as e:
+        print("error----------------------------------", e)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
