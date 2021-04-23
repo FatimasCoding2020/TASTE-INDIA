@@ -29,3 +29,31 @@ def signup_controller(payload, db_conn):
     except Exception as e:
         return {"success": False, "message": "Error in api: " + str(e)}
 
+
+# user login
+def login_controller(payload, db_conn):
+    print("Inside login_controller")
+    try:
+        user_data = db_conn["users"].find_one({"email": payload["email"]})
+        print(user_data)
+        print(str(user_data.get("_id")))
+        if user_data:
+            print("user data verified")
+
+            if check_password_hash(
+                    user_data.get("password"),
+                    payload.get("password")):
+                print("password verified")
+                return {
+                    "success": True,
+                    "message": "successfully logged in..",
+                    "_id": str(user_data.get("_id")),
+                }
+            else:
+                return {"success": False, "message": "Incorrect Password"}
+
+        else:
+            return {"success": False, "message": "User does not exist"}
+    except Exception as e:
+        print(e)
+        return {"success": False, "message": "Error in api: " + str(e)}

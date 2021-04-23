@@ -1,16 +1,18 @@
 import os
+from datetime import datetime, timedelta
 from flask import (
     Flask,
     render_template,
     request,
     redirect,
     url_for,
+    make_response,
 )
+import jwt
 from database import db
 from controllers.login_authorize import login_authorize
 from controllers.recipe_controller import *
 from controllers.users_controller import *
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -75,6 +77,54 @@ def signup():
 
         return render_template("users/signup.html")
     except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    try:
+        if request.method == "POST":
+            checkbox = (request.form.get("checkbox")
+                        if "checkbox" in request.form else "off")
+
+            if checkbox == "off":
+                error = "Please select terms & condition and proceed"
+                return render_template("users/login.html", error=error)
+            # getting payload from login form
+            print(request.form)
+            payload = dict(
+                email=request.form["email"],
+                password=request.form["password"],
+            )
+            # verifying the user login
+            response = login_controller(payload, db)
+            print("user login verified", response)
+            if response["success"]:
+                # creating the JWT token for user session
+                print("creating JWT token")
+                encode = jwt.encode(
+                    {
+                        "iat": datetime.now(),
+                        "email": payload["email"],
+                        "exp": datetime.now() + timedelta(days=3),
+                    },
+                    "SECRET",
+                    algorithm="HS256",
+                )
+                # print("encode--------------------",encode)
+                resp = make_response(redirect(url_for("profile")))
+                # token = str(encode).split("'")[1]
+                print("token---------------", encode)
+                # setting cookie using lofin token
+                resp.set_cookie("logintoken", encode)
+                return resp
+            else:
+                error = "Your email or password didn't match"
+                return render_template("users/login.html", error=error)
+
+        return render_template("users/login.html")
+    except Exception as e:
+        print("error ------------------", e)
         return render_template("error_handlers/error.html")
 
 
