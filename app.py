@@ -35,6 +35,19 @@ def home():
         return render_template("error_handlers/error.html")
 
 
+@app.route("/shop")
+def shop():
+    try:
+        # checking for user login status  if not  then redirecting to login
+        # page
+        login_data = login_authorize(request, db)
+        if not login_data["success"]:
+            return redirect(url_for("login"))
+        return render_template("misc/shop.html")
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     try:
