@@ -30,3 +30,19 @@ def all_recipe_controller(filters, db_conn, host_url):
     except Exception as e:
         print(e)
         return {"success": False, "message": "Error in api: " + str(e)}
+        
+
+# functions to add recipe to database
+def add_recipe_controller(payload, db_conn):
+    try:
+        result = db_conn["recipes"].insert_one(payload)
+        print(result.inserted_id)
+        print(result.acknowledged)
+        return {
+            "success": True,
+            "message": "Recipe created successfully",
+        }
+
+    except Exception as e:
+        return {"success": False, "message": "Error in api: " + str(e)}
+

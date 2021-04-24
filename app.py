@@ -1,5 +1,7 @@
 import os
 from datetime import datetime, timedelta
+import random
+import string
 from flask import (
     Flask,
     render_template,
@@ -8,6 +10,7 @@ from flask import (
     url_for,
     make_response,
 )
+from werkzeug.utils import secure_filename
 import jwt
 from database import db
 from controllers.login_authorize import login_authorize
@@ -19,6 +22,16 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 IMAGE_DIR = os.path.join(APP_ROOT, "static/uploaded_images")
+
+
+
+# generating random striing
+def randstr():
+    return "".join(
+        random.choice(
+            string.ascii_lowercase +
+            string.digits) for _ in range(10))
+
 
 
 @app.route("/", methods=["GET"])
@@ -156,6 +169,55 @@ def logout():
         resp = make_response(redirect(url_for("login")))
         resp.set_cookie("logintoken", expires=0)
         return resp
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/addrecipes", methods=["GET", "POST"])
+def add_recipes():
+    try:
+        print("from add recipes...")
+        # validating user before adding recipe
+        login_data = login_authorize(request, db)
+        print(login_data)
+        # if login is unsuccessfull redirecting to login page again
+        if not login_data["success"]:
+            return redirect(url_for("login"))
+        # we user is logged in reading user input from form
+        if request.method == "POST":
+            # reading the imade file
+            image = request.files["imagefile"]
+            # reading image url
+            imagelink = request.form.get("imageurl")
+            # when image filename is available saving the uploaded image file
+            # to /static/uploaded_images/ directory
+            if len(image.filename) != 0:
+                image_file = secure_filename(randstr() + "-" + image.filename)
+                image.save(os.path.join(IMAGE_DIR, image_file))
+                imagelink = "/static/uploaded_images/" + str(image_file)
+            # creating payload dictonary from form to save to database
+            payload = dict(
+                recipeName=request.form.get("recepiename", None),
+                category=request.form.getlist("category", None),
+                description=request.form.get("description", None),
+                imageUrl=imagelink,
+                servings=request.form.get("servings", None),
+                preprationTime=request.form.get("preparationtime", None),
+                cookingTime=request.form.get("cookingtime", None),
+                ingredients=request.form.get("ingredients", None),
+                instructions=request.form.get("instructions", None),
+                tips=request.form.get("tips", None),
+                userId=login_data["_id"],
+                createdOn=datetime.now(),
+                isFavourate=False,
+                ratings=request.form.get("ratings", 0),
+            )
+            response = add_recipe_controller(payload=payload, db_conn=db)
+
+            # print("response---------", response)
+            return redirect(url_for("profile"))
+
+        return render_template("recipes/addrecipes.html")
     except BaseException:
         return render_template("error_handlers/error.html")
 
