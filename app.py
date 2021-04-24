@@ -223,6 +223,30 @@ def add_recipes():
         return render_template("error_handlers/error.html")
 
 
+@app.route("/deleterecipe/<recipieid>", methods=["GET"])
+def delete_recipe(recipieid):
+    try:
+        print("from delete recipe...")
+        # validating user before adding recipe
+        login_data = login_authorize(request, db)
+        print(login_data)
+        # if login is unsuccessfull redirecting to login page again
+        if not login_data["success"]:
+            return redirect(url_for("login"))
+        directory = os.getcwd()
+        response = db["recipes"].find_one({"_id": ObjectId(recipieid)})
+        db["recipes"].delete_one({"_id": ObjectId(recipieid)})
+        print("image url -------", response["imageUrl"])
+        if os.path.exists(directory + response["imageUrl"]):
+            os.remove(directory + response["imageUrl"])
+
+        print("Recipe deleted successfully!")
+        return redirect(url_for("profile"))
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+
 @app.route("/single_recipes/<recipieid>")
 def single_recipes(recipieid):
     try:
