@@ -16,6 +16,7 @@ from database import db
 from controllers.login_authorize import login_authorize
 from controllers.recipe_controller import *
 from controllers.users_controller import *
+from controllers.categories_controller import *
 
 app = Flask(__name__)
 
@@ -219,6 +220,32 @@ def add_recipes():
 
         return render_template("recipes/addrecipes.html")
     except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/single_recipes/<recipieid>")
+def single_recipes(recipieid):
+    try:
+        login_data = login_authorize(request, db)
+        # if login is unsuccessfull redirecting to login page again
+        islogin = True if login_data["success"] else False
+        # this API only gives one output
+        payload_filter = dict({"_id": ObjectId(recipieid)})
+        response = single_recipe_controller(
+            payload_filter, db_conn=db, host_url=request.host_url)[0]
+        if islogin:
+            islogin = True if (
+                response["userid"] == login_data["_id"]) else False
+        # print("response :", response)
+        response["username"] = get_user_name(response["userid"], db)
+
+        return render_template(
+            "recipes/single-recipes.html",
+            result=response,
+            hasresult=True,
+            islogin=islogin)
+    except Exception as e:
+        print("Error-------------", e)
         return render_template("error_handlers/error.html")
 
 
