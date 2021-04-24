@@ -34,7 +34,6 @@ def randstr():
             string.digits) for _ in range(10))
 
 
-
 @app.route("/", methods=["GET"])
 def home():
     try:
@@ -307,7 +306,6 @@ def delete_recipe(recipieid):
         return render_template("error_handlers/error.html")
 
 
-
 @app.route("/single_recipes/<recipieid>")
 def single_recipes(recipieid):
     try:
@@ -331,6 +329,17 @@ def single_recipes(recipieid):
             islogin=islogin)
     except Exception as e:
         print("Error-------------", e)
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/recipes", methods=["GET", "POST"])
+def recipes():
+    try:
+        response = all_recipe_controller(
+            {}, db_conn=db, host_url=request.host_url)
+        # print("response :", response)
+        return render_template("recipes/recipes.html", result=response, hasresult=True)
+    except BaseException:
         return render_template("error_handlers/error.html")
 
 
