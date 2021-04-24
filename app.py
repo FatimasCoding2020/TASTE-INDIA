@@ -223,6 +223,67 @@ def add_recipes():
         return render_template("error_handlers/error.html")
 
 
+@app.route("/updaterecipe/<recipieid>", methods=["GET", "POST"])
+def update_recipe(recipieid):
+    try:
+        print("from update recipe...")
+        # validating user before adding recipe
+        login_data = login_authorize(request, db)
+        print(login_data)
+        # if login is unsuccessfull redirecting to login page again
+        if not login_data["success"]:
+            return redirect(url_for("login"))
+
+        response = single_recipe_controller(
+            {"_id": ObjectId(recipieid)}, db, request.host_url)[0]
+        response["servings"] = "\n".join(response["servings"])
+        response["description"] = "\n".join(response["description"])
+        response["ingredients"] = "\n".join(response["ingredients"])
+        response["instructions"] = "\n".join(response["instructions"])
+        response["tips"] = "\n".join(response["tips"])
+        if request.method == "POST":
+            image = request.files["imagefile"]
+            # reading image url
+            imagelink = request.form.get("imageurl")
+            imagelink = (
+                "/static/uploaded_images/" + str(imagelink).split("/")[-1]
+                if "static" in imagelink
+                else imagelink
+            )
+            # when image filename is available saving the uploaded image file
+            # to /static/uploaded_images/ directory
+            if len(image.filename) != 0:
+                image_file = secure_filename(randstr() + "-" + image.filename)
+                image.save(os.path.join(IMAGE_DIR, image_file))
+                imagelink = "/static/uploaded_images/" + str(image_file)
+            query = {"_id": ObjectId(recipieid)}
+            update = dict(
+                recipeName=request.form.get("recepiename", None),
+                category=request.form.getlist("category", None),
+                description=request.form.get("description", None),
+                imageUrl=imagelink,
+                servings=request.form.get("servings", None),
+                preprationTime=request.form.get("preparationtime", None),
+                cookingTime=request.form.get("cookingtime", None),
+                ingredients=request.form.get("ingredients", None),
+                instructions=request.form.get("instructions", None),
+                tips=request.form.get("tips", None),
+                userId=login_data["_id"],
+                updatedOn=datetime.now(),
+                isFavourate=request.form.get("isFavourate", None),
+            )
+            db["recipes"].update_one(query, {"$set": update})
+            print("Recipe updated successfully!")
+            return redirect(url_for("profile"))
+
+        return render_template(
+            "recipes/editrecipe.html",
+            result=response,
+            hasresult=True)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
 @app.route("/deleterecipe/<recipieid>", methods=["GET"])
 def delete_recipe(recipieid):
     try:
