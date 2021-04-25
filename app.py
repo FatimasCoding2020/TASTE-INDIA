@@ -17,6 +17,7 @@ from controllers.login_authorize import login_authorize
 from controllers.recipe_controller import *
 from controllers.users_controller import *
 from controllers.categories_controller import *
+from controllers.stats_controller import *
 
 app = Flask(__name__)
 
@@ -351,7 +352,7 @@ def rice():
     try:
         response = get_category_recipe(
             {"category": "RICE"}, db_conn=db, host_url=request.host_url)
-        return render_template("recipes/rice.html", result=response, hasresult=True)
+        return render_template("categories/rice.html", result=response, hasresult=True)
 
     except BaseException:
         return render_template("error_handlers/error.html")
@@ -363,7 +364,7 @@ def vegetarian():
         response = get_category_recipe(
             {"category": "VEGETARIAN"}, db_conn=db, host_url=request.host_url)
         return render_template(
-            "recipes/vegetarian.html",
+            "categories/vegetarian.html",
             result=response,
             hasresult=True)
     except BaseException:
@@ -379,7 +380,7 @@ def non_vegetarian():
                 "category": "NON-VEGETARIAN"
                 }, db_conn=db, host_url=request.host_url)
         return render_template(
-            "recipes/non-Vegetarian.html",
+            "categories/non-Vegetarian.html",
             result=response,
             hasresult=True)
     except BaseException:
@@ -392,7 +393,7 @@ def desserts():
         response = get_category_recipe(
             {"category": "DESSERTS"}, db_conn=db, host_url=request.host_url)
         return render_template(
-            "recipes/desserts.html",
+            "categories/desserts.html",
             result=response,
             hasresult=True)
     except BaseException:
@@ -405,7 +406,7 @@ def snacks():
 
         response = get_category_recipe(
             {"category": "SNACKS"}, db_conn=db, host_url=request.host_url)
-        return render_template("recipes/snacks.html", result=response, hasresult=True)
+        return render_template("categories/snacks.html", result=response, hasresult=True)
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -415,7 +416,7 @@ def drinks():
     try:
         response = get_category_recipe(
             {"category": "DRINKS"}, db_conn=db, host_url=request.host_url)
-        return render_template("recipes/drinks.html", result=response, hasresult=True)
+        return render_template("categories/drinks.html", result=response, hasresult=True)
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -428,10 +429,87 @@ def spicepentry():
                 "category": "SPICE-PANTRY"
                 }, db_conn=db, host_url=request.host_url)
         return render_template(
-            "recipes/spicepentry.html",
+            "categories/spicepentry.html",
             result=response,
             hasresult=True)
     except BaseException:
+        return render_template("error_handlers/error.html")
+
+@app.route("/term")
+def term():
+    return render_template("misc/term.html")
+
+
+@app.route("/stats")
+def stats():
+    try:
+        login_data = login_authorize(request, db)
+        if not login_data["success"]:
+            return redirect(url_for("login"))
+        response = get_stats(db, request.host_url)
+        return render_template("misc/stat.html", result=response)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+# Handling error 404 and displaying relevant web page
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("error_handlers/error.html"), 404
+
+
+# @app.route("/myaccount")
+# def method_name():
+#     return render_template("myaccount.html")
+
+
+@app.route("/search", methods=["POST"])
+def search_api():
+    if request.method == "POST":
+        search_string = request.form.get("searchstring", "")
+
+        if len(search_string) == 0:
+            is_search = False
+            return render_template("misc/search.html", is_search=is_search)
+        collection_filter = {
+            "$or": [
+                {"recipeName": {"$regex": search_string, "$options": "i"}},
+                {"category": {"$regex": search_string, "$options": "i"}},
+                {"description": {"$regex": search_string, "$options": "i"}},
+                {"ingredients": {"$regex": search_string, "$options": "i"}},
+                {"instructions": {"$regex": search_string, "$options": "i"}},
+            ]
+        }
+        print("collection_filter", collection_filter)
+        response = db["recipes"].find(collection_filter)
+        result = map_response(response, request.host_url)
+        is_search = True if len(result) > 0 else False
+        return render_template(
+            "misc/search.html",
+            result=result,
+            is_search=is_search)
+
+
+# test to insert data to the data base
+@app.route("/subscription", methods=["POST"])
+def subscribe():
+    print("Inside Subscription API")
+    try:
+        if request.method == 'POST':
+            payload = dict(
+                email=request.form["email"],
+            )
+            user_data = db["subscription"].find_one(payload)
+            if user_data:
+                message = "Hi, You are already subscribed"
+                return render_template("misc/subscription.html", message=message)
+            else:
+                message = "Hi, You are subscribed now"
+                db["subscription"].insert_one(payload)
+                return render_template("misc/subscription.html", message=message)
+
+    except Exception as e:
+        print(e)
         return render_template("error_handlers/error.html")
 
 
