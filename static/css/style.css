@@ -244,7 +244,7 @@ a.read-more:hover,
 
 /*
 * ----------------------------------------------------------------------------------------
-* 03.HEADER AREA
+* 03.HEADER VERY TOP AREA
 * ----------------------------------------------------------------------------------------
 */
 .header-very-top-area {
@@ -433,7 +433,7 @@ a.read-more:hover,
 }
 
 .gallery figure.effect-julia img {
-    height: auto;
+    height: 360px;
     width: 100%;
 }
 
@@ -584,7 +584,7 @@ a.read-more:hover,
     font-size: 16px;
 }
 
-.newsletter input {
+.newslatter input {
     padding: 10px;
 }
 
@@ -764,12 +764,12 @@ label {
     z-index: -1;
 }
 .login-bg {
-	background: url(../images/bg/loginbg.jpg);
+	background: url(../images/loginbg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 .sign-up-bg {
-	background: url(../images/bg/signupbg.jpg);
+	background: url(../images/signupbg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }

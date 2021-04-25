@@ -11,255 +11,273 @@
     <meta name="author" content="">
     <!-- PAGE TITLE -->
     <title>Taste India | Traditional & Creative Recipes</title>
-    <link rel="icon" href="{{url_for('static', filename= 'images/favi.png')}}" type="image/gif" sizes="16x16">
+    <link rel="icon" href="{{ url_for('static', filename= 'images/favi.png') }}" type="image/gif" sizes="16x16">
     <!-- BOOTSTRAP CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}">
     <!-- ALL GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700,900" rel="stylesheet">
     <!-- FONT AWESOME CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename= 'fonts/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'fonts/font-awesome.min.css') }}">
     <!-- MAGNIFIC CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/magnific-popup.css') }}">
     <!-- ANIMATE CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/animate.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/effects.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/effects.css') }}">
     <!-- MAIN STYLE CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <!-- RESPONSIVE CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename= 'css/responsive.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/responsive.css') }}">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 
 <body>
-    <!-- START PRELOADER AREA-->
-    <div class="preloader-area">
-        <div class="spinner">
-            <div class="dot1"></div>
-            <div class="dot2"></div>
+<!-- START PRELOADER AREA-->
+<div class="preloader-area">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+<!-- END PRELOADER AREA -->
+
+<!-- START HEADER VERY TOP AREA-->
+<div class="header-very-top-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">HOME</a></li>
+                    <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                    <li><a href="#subscribe">SUBSCRIBE</a></li>
+                    <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
+                    <li><a href="{{ url_for('login') }}">LOGIN</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <!-- END PRELOADER AREA -->
+</div>
+<!-- / END HEADER VERY TOP AREA-->
 
-    <!-- START HEADER VERY TOP AREA-->
-    <div class="header-very-top-area">
-        <div class="container">
+<!-- START MENU DESIGN AREA -->
+<header class="welcome-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- START LOGO DESIGN AREA -->
+                <div class="logo text-center">
+                    <a href="{{ url_for('home') }}">
+                        <img src="{{ url_for('static', filename= 'images/logo.png') }}" alt="">
+                    </a>
+                </div>
+                <!-- END LOGO DESIGN AREA -->
+            </div>
+        </div>
+        <div class="row menu-border">
+            <div class="col-md-9 col-xs-12">
+                <!-- START MENU DESIGN AREA -->
+                <div class="mainmenu">
+                    <div class="navbar navbar-nobg">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li class="active"><a class="smooth-scroll" href="recipes.html">ALL
+                                    <div class="ripple-wrapper"></div>
+                                </a>
+                                </li>
+                                <li><a class="smooth-scroll" href="{{ url_for('rice') }}">RICE </a></li>
+                                <li><a class="smooth-scroll" href="{{ url_for('vegetarian') }}">VEGETARIAN</a></li>
+                                <li><a class="smooth-scroll" href="{{ url_for('non_vegetarian') }}">NON-VEGETARIAN</a>
+                                </li>
+                                <li><a class="smooth-scroll" href="{{ url_for('desserts') }}">DESSERTS</a></li>
+                                <li><a class="smooth-scroll" href="{{ url_for('snacks') }}">SNACKS</a></li>
+                                <li><a class="smooth-scroll" href="{{ url_for('drinks') }}">DRINKS</a></li>
+                                <li><a class="smooth-scroll" href="{{ url_for('spicepentry') }}">SPICE PANTRY</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END MENU DESIGN AREA -->
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="search-area">
+                    <form class="form-inline" action="{{ url_for('search_api') }}" method="POST"
+                          enctype="multipart/form-data">
+                        <input class="form-control" type="search" name="searchstring" placeholder="Search"
+                               aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- / END MENU DESIGN AREA -->
+
+<!-- START SIGN UP DESIGN AREA -->
+<section class="login-area section-padding">
+    <div class="container">
+        <div class="page-backgroundimage sign-up-bg">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="section-title">
+                        <h2>Sign Up</h2>
+                        <h4 style="color:red;">{{ error }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- START ACCOUNT DESIGN AREA -->
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="single-account">
+                        <form action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Full Name</label>
+                                <input type="text" name="username" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Full Name">
+                                <small id="emailHelp" class="form-text text-muted">5-20 CHARACTERS (ONLY LETTERS &
+                                    NUMBERS) </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                       placeholder="Password">
+                                <small id="emailHelp" class="form-text text-muted">MUST CONTAIN AT LEAST ONE NUMBER ,
+                                    ONE UPPER LOWERCASE LETTER AND BETWEEN 5-20 CHARACTERS </small>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1"><a href="term.html">i agree to terms
+                                    and conditions</a></label>
+                            </div>
+                            <div class="add-button">
+                                <button type="submit" class="btn btn-primary">SIGN UP</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- / END ACCOUNT DESIGN AREA -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / END SIGN UP DESIGN AREA -->
+
+<!-- START FOOTER DESIGN AREA -->
+<section class="footer-top-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="single-footer-top">
+                    <h2>Quick Links</h2>
+                    <div class="footer-menu">
+                        <ul>
+                            <li><a href="{{ url_for('home') }}">HOME</a></li>
+                            <li><a href="{{ url_for('recipes') }}">ALL RECIPES</a></li>
+                            <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                            <li><a href="{{ url_for('login') }}">Login & Add Recipe</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="single-footer-top">
+                    <div id="subscribe" class="newslatter text-center">
+                        <h2>Newsletter</h2>
+
+                        <p>Subscribe to our weekly Newsletter and stay tuned.</p>
+                        <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
+                            <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
+                                <input name="email" class="form-control" type="text" id="name"
+                                       placeholder="your@email.com">
+                            </div>
+                            <br/>
+                            <input type="submit" value="SUBSCRIBE" class="btn btn-large read-more"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row social-border">
+            <div class="col-md-12">
+                <div class="contact-social text-center">
                     <ul>
-                        <li><a href="{{ url_for('home') }}">HOME</a></li>
-                        <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                        <li><a href="#subscribe">SUBSCRIBE</a></li>
-                        <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
-                        <li><a href="{{ url_for('login') }}">LOGIN</a></li>
+                        <li><a href="https://www.facebook.com/taste.india.71/" target="_blank"><i
+                                class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/tasteindiarecipes/" target="_blank"><i
+                                class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.pinterest.com/TasteIndiaRecipes/_saved/" target="_blank"><i
+                                class="fa fa-pinterest"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/syedafatimaomer/" target="_blank"><i
+                                class="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCwQKQGe-tKJGCSY-Tw3rhhA/about" target="_blank"><i
+                                class="fa fa-youtube"></i></a></li>
+                        <li><a href="https://github.com/FatimasCoding2020" target="_blank"><i class="fa fa-github"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- / END HEADER VERY TOP AREA-->
+</section>
 
-    <!-- START MENU DESIGN AREA -->
-    <header class="welcome-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- START LOGO DESIGN AREA -->
-                    <div class="logo text-center">
-                        <a href="{{ url_for('home') }}">
-                            <img src="{{url_for('static', filename= 'images/logo.png')}}" alt="">
-                        </a>
-                    </div>
-                    <!-- END LOGO DESIGN AREA -->
+<footer class="footer-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="footer-text">
+                    <h6>&copy;copyright | Syeda Fatima All right Reserved</h6>
                 </div>
             </div>
-            <div class="row menu-border">
-                <div class="col-md-9 col-xs-12">
-                    <!-- START MENU DESIGN AREA -->
-                    <div class="mainmenu">
-                        <div class="navbar navbar-nobg">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                            <div class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav navbar-left">
-                                    <li class="active"><a class="smooth-scroll" href="recipes.html">ALL <div class="ripple-wrapper"></div></a>
-                                    </li>
-                                    <li><a class="smooth-scroll" href="{{ url_for('rice') }}">RICE </a></li>
-                                    <li><a class="smooth-scroll" href="{{ url_for('vegetarian') }}">VEGETARIAN</a></li>
-                                    <li><a class="smooth-scroll" href="{{ url_for('non_vegetarian') }}">NON-VEGETARIAN</a></li>
-                                    <li><a class="smooth-scroll" href="{{ url_for('desserts') }}">DESSERTS</a></li>
-                                    <li><a class="smooth-scroll" href="{{ url_for('snacks') }}">SNACKS</a></li>
-                                    <li><a class="smooth-scroll" href="{{ url_for('drinks') }}">DRINKS</a></li>
-                                    <li><a class="smooth-scroll" href="{{ url_for('spicepentry') }}">SPICE PANTRY</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END MENU DESIGN AREA -->
-                </div>
-                <div class="col-md-3 col-xs-12">
-                    <div class="search-area">
-                        <form class="form-inline" action="{{ url_for('search_api') }}" method="POST" enctype="multipart/form-data">
-                            <input class="form-control" type="search" name="searchstring" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- / END MENU DESIGN AREA -->
-
-    <!-- START SIGN UP DESIGN AREA -->
-    <section class="login-area section-padding">
-        <div class="container">
-            <div class="page-backgroundimage sign-up-bg">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h2>Sign Up</h2>
-                            <h4 style="color:red;">{{error}}</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- START ACCOUNT DESIGN AREA -->
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="single-account">
-                            <form action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Full Name</label>
-                                    <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Full Name">
-                                    <small id="emailHelp" class="form-text text-muted">5-20 CHARACTERS (ONLY LETTERS & NUMBERS) </small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                    <small id="emailHelp" class="form-text text-muted">MUST CONTAIN AT LEAST ONE NUMBER , ONE UPPER LOWERCASE LETTER AND BETWEEN 5-20 CHARACTERS </small>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1"><a href="term.html">i agree to terms and conditions</a></label>
-                                </div>
-                                <div class="add-button">
-                                    <button type="submit" class="btn btn-primary">SIGN UP</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- / END ACCOUNT DESIGN AREA -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- / END SIGN UP DESIGN AREA -->
-
-    <!-- START FOOTER DESIGN AREA -->
-    <section class="footer-top-area section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-footer-top">
-                        <h2>Quick Links</h2>
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="{{ url_for('home') }}">HOME</a></li>
-                                <li><a href="{{ url_for('recipes') }}">ALL RECIPES</a></li>
-                                <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                                <li><a href="{{ url_for('login') }}">Login & Add Recipe</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-footer-top">
-                        <div id="subscribe" class="newslatter text-center">
-                            <h2>Newsletter</h2>
-
-                            <p>Subscribe to our weekly Newsletter and stay tuned.</p>
-                            <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
-                                <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
-                                    <input name="email" class="form-control" type="text" id="name" placeholder="your@email.com">
-                                </div>
-                                <br />
-                                <input type="submit" value="SUBSCRIBE" class="btn btn-large read-more" />
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row social-border">
-                <div class="col-md-12">
-                    <div class="contact-social text-center">
-                        <ul>
-                            <li><a href="https://www.facebook.com/taste.india.71/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://www.instagram.com/tasteindiarecipes/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="https://www.pinterest.com/TasteIndiaRecipes/_saved/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="https://www.linkedin.com/in/syedafatimaomer/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="https://www.youtube.com/channel/UCwQKQGe-tKJGCSY-Tw3rhhA/about" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="https://github.com/FatimasCoding2020" target="_blank"><i class="fa fa-github"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer-area section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div class="footer-text">
-                        <h6>&copy;copyright | Syeda Fatima All right Reserved</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- / END FOOTER DETAILS DESIGN AREA -->
-
-    <!-- START scroll UP DESIGN AREA -->
-    <div class="scroll-to-up">
-        <div class="scrollup">
-            <i class="fa fa-angle-double-up"></i>
         </div>
     </div>
-    <!-- / END scroll UP DESIGN AREA -->
+</footer>
+<!-- / END FOOTER DETAILS DESIGN AREA -->
+
+<!-- START scroll UP DESIGN AREA -->
+<div class="scroll-to-up">
+    <div class="scrollup">
+        <i class="fa fa-angle-double-up"></i>
+    </div>
+</div>
+<!-- / END scroll UP DESIGN AREA -->
 
 
+<!-- LATEST JQUERY -->
+<script src="{{ url_for('static', filename= 'js/jquery.min.js') }}"></script>
 
-
-    <!-- LATEST JQUERY -->
-    <script src="{{url_for('static', filename= 'js/jquery.min.js')}}"></script>
-
-    <!-- BOOTSTRAP JS -->
-    <script src="{{url_for('static', filename= 'js/bootstrap.min.js')}}"></script>
-    <!-- MAGNIFICANT JS -->
-    <script src="{{url_for('static', filename= 'js/jquery.magnific-popup.min.js')}}"></script>
-    <!-- WOW JS -->
-    <script src="{{url_for('static', filename= 'js/wow.min.js')}}"></script>
-    <!-- scripts js -->
-    <script src="{{url_for('static', filename= 'js/scripts.js')}}"></script>
+<!-- BOOTSTRAP JS -->
+<script src="{{ url_for('static', filename= 'js/bootstrap.min.js') }}"></script>
+<!-- MAGNIFICANT JS -->
+<script src="{{ url_for('static', filename= 'js/jquery.magnific-popup.min.js') }}"></script>
+<!-- WOW JS -->
+<script src="{{ url_for('static', filename= 'js/wow.min.js') }}"></script>
+<!-- scripts js -->
+<script src="{{ url_for('static', filename= 'js/scripts.js') }}"></script>
 </body>
 
 </html>

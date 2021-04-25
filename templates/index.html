@@ -1,72 +1,238 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
 
-    <!-- Introduction -->
-    <div class="row" id="image-header">
-        <div class="col s12 intro-text">
-            <h3 id="home-quote">A perfect way to start the day.</h3>
-            <p id="home-text">Get inspired, share recipes and enjoy.</p>
-        </div>
-    </div>
-
-    <!-- About -->
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <h3 class="center-align">Start the day good</h3>
-                <h5 class="center-align">
-                    Food is the most important energy source for your body. You can think 
-                    of food as fuel for your body. For new energy is a healthy breakfast the 
-                    perfect way to start the day.
-                </h5>
-                <h5 class="center-align"> 
-                    Get inspired by a variety of breakfast ideas, search for tasty recipes and 
-                    post your own recipes.
-                </h5>
-            </div>
-        </div>
-    </div>
-
-    <!-- CTA to sign up -->
-    <div class="row" id="black-row">
-        <div class="col s12">
-            <h3 class="center-align">Get inspired, share and create. <a href="{{ url_for('signup') }}"  id="white-cta">Signup!</a></h3>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Mobile | recipes  -->
-        <div class="row show-on-small hide-on-med-and-up">
-            <div class="col s12">
-                <h3 class="center-align">Recipes</h3>
-                <div class="row">
-                    {% for recipe in mob_recipes %}
-                        <div class="col s12 recipes-display">
-                            <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
-                                <img class="img_recipe" src="{{ recipe.img_url}}" alt="recipe">
-                                <span class="card-title recipes-title">{{ recipe.recipe_name }}</span>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-         <!-- Desktop and Tablet | recipes  -->
-        <div class="row hide-on-small-only">
-            <div class="col s12">
-                <h3 class="center-align">Recipes</h3>
-                <div class="row">
-                    {% for recipe in recipes %}
-                        <div class="col s4 recipes-display">
-                            <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
-                                <img class="img_recipe" src="{{ recipe.img_url}}" alt="recipe_mobile">
-                                <span class="card-title recipes-title">{{ recipe.recipe_name }}</span>
-                            </a>
-                        </div>
-                    {% endfor %}
+    <!-- START HEADER VERY TOP AREA-->
+    <div class="header-very-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">HOME</a></li>
+                        <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                        <!--                        <li><a href="#subscribe">SUBSCRIBE</a></li>-->
+                        {% if not islogin %}
+                        <li><a href="{{ url_for('login') }}">LOGIN</a></li>
+                        <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('profile') }}">PROFILE</a></li>
+                        <li><a href="{{ url_for('stats') }}">VIEW STATS</a></li>
+                        <li><a href="{{ url_for('logout') }}">LOG OUT</a></li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+    <!-- / END HEADER VERY TOP AREA-->
 
-{% endblock %}
+    <!-- START MENU DESIGN AREA -->
+    <header class="welcome-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- START LOGO DESIGN AREA -->
+                    <div class="logo text-center">
+                        <a href="{{ url_for('home') }}">
+                            <img src="{{url_for('static', filename= 'images/logo.png')}}" alt="">
+                        </a>
+                    </div>
+                    <!-- END LOGO DESIGN AREA -->
+                </div>
+            </div>
+            <div class="row menu-border">
+                <div class="col-md-9 col-xs-12">
+                    <!-- START MENU DESIGN AREA -->
+                    <div class="mainmenu">
+                        <div class="navbar navbar-nobg">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav navbar-left">
+                                    <li class="active"><a class="smooth-scroll" href="{{ url_for('recipes') }}">ALL <div class="ripple-wrapper"></div></a>
+                                    </li>
+                                    <li><a class="smooth-scroll" href="{{ url_for('rice') }}">RICE </a></li>
+                                    <li><a class="smooth-scroll" href="{{ url_for('vegetarian') }}">VEGETARIAN</a></li>
+                                    <li><a class="smooth-scroll" href="{{ url_for('non_vegetarian') }}">NON-VEGETARIAN</a></li>
+                                    <li><a class="smooth-scroll" href="{{ url_for('desserts') }}">DESSERTS</a></li>
+                                    <li><a class="smooth-scroll" href="{{ url_for('snacks') }}">SNACKS</a></li>
+                                    <li><a class="smooth-scroll" href="{{ url_for('drinks') }}">DRINKS</a></li>
+                                    <li><a class="smooth-scroll" href="{{ url_for('spicepentry') }}">SPICE PANTRY</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END MENU DESIGN AREA -->
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    <div class="search-area">
+                        <form class="form-inline" action="{{ url_for('search_api') }}" method="POST" enctype="multipart/form-data">
+                            <input class="form-control" type="search" name="searchstring" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- / END MENU DESIGN AREA -->
+
+
+    <!-- START SLIDER DESIGN AREA -->
+    <section id="About" class="about-us-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="{{url_for('static', filename= 'images/slider1.jpg')}}" alt="Chania">
+                            </div>
+
+                            <div class="item">
+                                <img src="{{url_for('static', filename= 'images/slider2.jpg')}}" alt="Chania">
+                            </div>
+
+                            <div class="item">
+                                <img src="{{url_for('static', filename= 'images/slider3.jpg')}}" alt="Chania">
+                            </div>
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <!-- <span class="glyphicon glyphicon-chevron-right"></span> -->
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="slider-bottom-text">
+                        <h2>Traditional and creative Indian recipes with exciting flavours and ingredients <br><a href="{{ url_for('signup') }}">SignUp</a> to add your own recipes! </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / END SLIDER DESIGN AREA -->
+
+
+    <!-- START RECIPES DESIGN AREA -->
+    <section id="gallery" class="gallery section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="section-title">
+                        <h2>Latest Recipes</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="work-inner">
+                <div class="row work-posts grid">
+                    {% for s in result %}
+                    <!-- START SINGLE RECIPES DESIGN AREA -->
+                    <div class="col-md-4 col-sm-6 mb30">
+                        <div class="item wow fadeInUp" data-wow-delay=".2s">
+                            <a href="{{ url_for('single_recipes',recipieid=s.id) }}">
+                                <figure class="effect-julia">
+                                    <img src="{{s.imageUrl}}" alt="image" width="400" height="360">
+                                    <figcaption>
+                                        <h2>{{s.recipeName}}</h2>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- END SINGLE RECIPES DESIGN AREA -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- / END RECIPES DESIGN AREA -->
+
+
+
+    <!-- START FOOTER DESIGN AREA -->
+    <section class="footer-top-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+
+                    <!-- START QUICK LINKS DESIGN AREA -->
+                    <div class="single-footer-top">
+                        <h2>Quick Links</h2>
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="{{ url_for('home') }}">HOME</a></li>
+                                <li><a href="{{ url_for('recipes') }}">ALL RECIPES</a></li>
+                                <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                                <li><a href="{{ url_for('login') }}">Login & Add Recipe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- / END QUICK LINKS DESIGN AREA -->
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+
+                <!-- START NEWSLATTER DESIGN AREA -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-footer-top">
+                        <div id="subscribe" class="newslatter text-center">
+                            <h2>Newsletter</h2>
+
+                            <p>Subscribe to our weekly Newsletter and stay tuned.</p>
+                            <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
+                                <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
+                                    <input name="email" class="form-control" type="text" id="name" placeholder="your@email.com">
+                                </div>
+                                <br />
+                                <input type="submit" value="SUBSCRIBE" class="btn btn-large read-more" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- END NEWSLATTER DESIGN AREA -->
+
+            </div>
+            <!-- START SOCIAL LINKS DESIGN AREA -->
+            <div class="row social-border">
+                <div class="col-md-12">
+                    <div class="contact-social text-center">
+                        <ul>
+                            <li><a href="https://www.facebook.com/taste.india.71/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/tasteindiarecipes/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.pinterest.com/TasteIndiaRecipes/_saved/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/syedafatimaomer/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCwQKQGe-tKJGCSY-Tw3rhhA/about" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="https://github.com/FatimasCoding2020" target="_blank"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END SOCIAL LINKS DESIGN AREA -->
+        </div>
+    </section>
+
+{% endbloc content %}
