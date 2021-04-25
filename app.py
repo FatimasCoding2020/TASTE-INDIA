@@ -342,6 +342,98 @@ def recipes():
     except BaseException:
         return render_template("error_handlers/error.html")
 
+# Note: below APIs for catogery filtering and same logic is used
+# 1. user login status is checked if not logged,
+# list out all  recipies on the catogery
+# 2.else list out the recepies owned by users
+@app.route("/rice")
+def rice():
+    try:
+        response = get_category_recipe(
+            {"category": "RICE"}, db_conn=db, host_url=request.host_url)
+        return render_template("recipes/rice.html", result=response, hasresult=True)
+
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/vegetarian")
+def vegetarian():
+    try:
+        response = get_category_recipe(
+            {"category": "VEGETARIAN"}, db_conn=db, host_url=request.host_url)
+        return render_template(
+            "recipes/vegetarian.html",
+            result=response,
+            hasresult=True)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/nonvegetarian")
+def non_vegetarian():
+    try:
+
+        response = get_category_recipe(
+            {
+                "category": "NON-VEGETARIAN"
+                }, db_conn=db, host_url=request.host_url)
+        return render_template(
+            "recipes/non-Vegetarian.html",
+            result=response,
+            hasresult=True)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/desserts")
+def desserts():
+    try:
+        response = get_category_recipe(
+            {"category": "DESSERTS"}, db_conn=db, host_url=request.host_url)
+        return render_template(
+            "recipes/desserts.html",
+            result=response,
+            hasresult=True)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/snacks")
+def snacks():
+    try:
+
+        response = get_category_recipe(
+            {"category": "SNACKS"}, db_conn=db, host_url=request.host_url)
+        return render_template("recipes/snacks.html", result=response, hasresult=True)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/drinks")
+def drinks():
+    try:
+        response = get_category_recipe(
+            {"category": "DRINKS"}, db_conn=db, host_url=request.host_url)
+        return render_template("recipes/drinks.html", result=response, hasresult=True)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/spicepantry")
+def spicepentry():
+    try:
+        response = get_category_recipe(
+            {
+                "category": "SPICE-PANTRY"
+                }, db_conn=db, host_url=request.host_url)
+        return render_template(
+            "recipes/spicepentry.html",
+            result=response,
+            hasresult=True)
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
