@@ -1,7 +1,6 @@
-import os
-from datetime import datetime, timedelta
 import random
 import string
+from datetime import datetime, timedelta
 from flask import (
     Flask,
     render_template,
@@ -12,10 +11,11 @@ from flask import (
 )
 from werkzeug.utils import secure_filename
 import jwt
+
 from database import db
 from controllers.login_authorize import login_authorize
-from controllers.recipe_controller import *
 from controllers.users_controller import *
+from controllers.recipe_controller import *
 from controllers.categories_controller import *
 from controllers.stats_controller import *
 
@@ -26,8 +26,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 IMAGE_DIR = os.path.join(APP_ROOT, "static/uploaded_images")
 
 
-
-# generating random striing
+# generating random string
 def randstr():
     return "".join(
         random.choice(
@@ -40,7 +39,7 @@ def home():
     try:
         print("_______________________________", request.host_url)
         login_data = login_authorize(request, db)
-        # if login is unsuccessfull redirecting to login page again
+        # if login is unsuccessful redirecting to login page again
         islogin = True if login_data["success"] else False
         response = all_recipe_controller_home(
             {}, db_conn=db, host_url=request.host_url)
@@ -147,7 +146,7 @@ def profile():
     try:
         login_data = login_authorize(request, db)
         # print(login_data)
-        # if login is unsuccessfull redirecting to login page again
+        # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
 
@@ -163,13 +162,52 @@ def profile():
         print("error----------------------------------", e)
 
 
+@app.route("/ratings/<recipieid>/<rating>")
+def add_rating(recipieid, rating):
+    login_data = login_authorize(request, db)
+    # if login is unsuccessful redirecting to login page again
+    if not login_data["success"]:
+        return redirect(url_for("login"))
+
+    query = {"_id": ObjectId(recipieid)}
+    update = dict(ratings=min(int(rating), 6))
+    db["recipes"].update_one(query, {"$set": update})
+    print("ratings", rating)
+    return redirect(url_for("profile"))
+
+
+@app.route("/favourites/<recipieid>/<favourite>")
+def add_to_favourite(recipieid, favourite):
+    login_data = login_authorize(request, db)
+    # if login is unsuccessful redirecting to login page again
+    if not login_data["success"]:
+        return redirect(url_for("login"))
+
+    query = {"_id": ObjectId(recipieid)}
+    update = dict(isFavourate={"0": False, "1": True}[str(favourite)])
+    db["recipes"].update_one(query, {"$set": update})
+    print("ratings", update)
+    return redirect(url_for("profile"))
+
+
 @app.route("/logout")
 def logout():
     try:
-        # expering token for logout
+        # expiring token for logout
         resp = make_response(redirect(url_for("login")))
         resp.set_cookie("logintoken", expires=0)
         return resp
+    except BaseException:
+        return render_template("error_handlers/error.html")
+
+
+@app.route("/recipes", methods=["GET", "POST"])
+def recipes():
+    try:
+        response = all_recipe_controller(
+            {}, db_conn=db, host_url=request.host_url)
+        # print("response :", response)
+        return render_template("recipes/recipes.html", result=response, hasresult=True)
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -181,7 +219,7 @@ def add_recipes():
         # validating user before adding recipe
         login_data = login_authorize(request, db)
         print(login_data)
-        # if login is unsuccessfull redirecting to login page again
+        # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
         # we user is logged in reading user input from form
@@ -230,7 +268,7 @@ def update_recipe(recipieid):
         # validating user before adding recipe
         login_data = login_authorize(request, db)
         print(login_data)
-        # if login is unsuccessfull redirecting to login page again
+        # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
 
@@ -291,7 +329,7 @@ def delete_recipe(recipieid):
         # validating user before adding recipe
         login_data = login_authorize(request, db)
         print(login_data)
-        # if login is unsuccessfull redirecting to login page again
+        # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
         directory = os.getcwd()
@@ -311,7 +349,7 @@ def delete_recipe(recipieid):
 def single_recipes(recipieid):
     try:
         login_data = login_authorize(request, db)
-        # if login is unsuccessfull redirecting to login page again
+        # if login is unsuccessful redirecting to login page again
         islogin = True if login_data["success"] else False
         # this API only gives one output
         payload_filter = dict({"_id": ObjectId(recipieid)})
@@ -319,7 +357,7 @@ def single_recipes(recipieid):
             payload_filter, db_conn=db, host_url=request.host_url)[0]
         if islogin:
             islogin = True if (
-                response["userid"] == login_data["_id"]) else False
+                    response["userid"] == login_data["_id"]) else False
         # print("response :", response)
         response["username"] = get_user_name(response["userid"], db)
 
@@ -333,20 +371,10 @@ def single_recipes(recipieid):
         return render_template("error_handlers/error.html")
 
 
-@app.route("/recipes", methods=["GET", "POST"])
-def recipes():
-    try:
-        response = all_recipe_controller(
-            {}, db_conn=db, host_url=request.host_url)
-        # print("response :", response)
-        return render_template("recipes/recipes.html", result=response, hasresult=True)
-    except BaseException:
-        return render_template("error_handlers/error.html")
-
-# Note: below APIs for catogery filtering and same logic is used
+# Note: below APIs for category filtering and same logic is used
 # 1. user login status is checked if not logged,
-# list out all  recipies on the catogery
-# 2.else list out the recepies owned by users
+# list out all  recipes on the category
+# 2.else list out the recipes owned by users
 @app.route("/rice")
 def rice():
     try:
@@ -378,7 +406,7 @@ def non_vegetarian():
         response = get_category_recipe(
             {
                 "category": "NON-VEGETARIAN"
-                }, db_conn=db, host_url=request.host_url)
+            }, db_conn=db, host_url=request.host_url)
         return render_template(
             "categories/non-Vegetarian.html",
             result=response,
@@ -427,13 +455,14 @@ def spicepentry():
         response = get_category_recipe(
             {
                 "category": "SPICE-PANTRY"
-                }, db_conn=db, host_url=request.host_url)
+            }, db_conn=db, host_url=request.host_url)
         return render_template(
             "categories/spicepentry.html",
             result=response,
             hasresult=True)
     except BaseException:
         return render_template("error_handlers/error.html")
+
 
 @app.route("/term")
 def term():
@@ -456,11 +485,6 @@ def stats():
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template("error_handlers/error.html"), 404
-
-
-# @app.route("/myaccount")
-# def method_name():
-#     return render_template("myaccount.html")
 
 
 @app.route("/search", methods=["POST"])
