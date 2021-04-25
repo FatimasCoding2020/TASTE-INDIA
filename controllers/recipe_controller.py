@@ -1,7 +1,16 @@
-import os
-from bson import json_util, ObjectId
-import json
+# functions to add recipe to database
+def add_recipe_controller(payload, db_conn):
+    try:
+        result = db_conn["recipes"].insert_one(payload)
+        print(result.inserted_id)
+        print(result.acknowledged)
+        return {
+            "success": True,
+            "message": "Recipe created successfully",
+        }
 
+    except Exception as e:
+        return {"success": False, "message": "Error in api: " + str(e)}
 
 
 # function to query all recipe from database
@@ -19,7 +28,6 @@ def all_recipe_controller_home(filters, db_conn, host_url):
         return {"success": False, "message": "Error in api: " + str(e)}
 
 
-
 def all_recipe_controller(filters, db_conn, host_url):
     print("from all recipe...")
     print("filter :", filters)
@@ -30,21 +38,7 @@ def all_recipe_controller(filters, db_conn, host_url):
     except Exception as e:
         print(e)
         return {"success": False, "message": "Error in api: " + str(e)}
-        
 
-# functions to add recipe to database
-def add_recipe_controller(payload, db_conn):
-    try:
-        result = db_conn["recipes"].insert_one(payload)
-        print(result.inserted_id)
-        print(result.acknowledged)
-        return {
-            "success": True,
-            "message": "Recipe created successfully",
-        }
-
-    except Exception as e:
-        return {"success": False, "message": "Error in api: " + str(e)}
 
 def map_response(data, host_url):
     try:
@@ -61,7 +55,7 @@ def map_response(data, host_url):
                     "category": d["category"][0],
                     "description": str(
                         d["description"]
-                        ).replace("\r", "").split("\n"),
+                    ).replace("\r", "").split("\n"),
                     "imageUrl": host_url + d["imageUrl"]
                     if "static" in d["imageUrl"]
                     else d["imageUrl"],
@@ -69,13 +63,13 @@ def map_response(data, host_url):
                     "preprationTime": d["preprationTime"],
                     "servings": str(
                         d["servings"]
-                        ).replace("\r", "").split("\n"),
+                    ).replace("\r", "").split("\n"),
                     "ingredients": str(
                         d["ingredients"]
-                        ).replace("\r", "").split("\n"),
+                    ).replace("\r", "").split("\n"),
                     "instructions": str(d["instructions"])
-                    .replace("\r", "")
-                    .split("\n"),
+                        .replace("\r", "")
+                        .split("\n"),
                     "tips": str(d["tips"]).replace("\r", "").split("\n"),
                     "ratings": d["ratings"],
                     "rating_count": [i for i in range(
@@ -94,4 +88,3 @@ def map_response(data, host_url):
     except Exception as e:
         print("error--e", e)
         return []
-

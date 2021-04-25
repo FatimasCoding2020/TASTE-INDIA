@@ -57,7 +57,7 @@ def login_controller(payload, db_conn):
     except Exception as e:
         print(e)
         return {"success": False, "message": "Error in api: " + str(e)}
-        
+
 
 def get_user_name(userid, db_conn):
     user_data = db_conn["users"].find_one({"_id": ObjectId(userid)})
