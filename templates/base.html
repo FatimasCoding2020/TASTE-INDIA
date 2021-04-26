@@ -46,6 +46,30 @@
 </div>
 <!-- END PRELOADER AREA -->
 
+<!-- START HEADER VERY TOP AREA-->
+    <div class="header-very-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">HOME</a></li>
+                        <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                        <!--                        <li><a href="#subscribe">SUBSCRIBE</a></li>-->
+                        {% if not islogin %}
+                        <li><a href="{{ url_for('login') }}">LOGIN</a></li>
+                        <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('profile') }}">PROFILE</a></li>
+                        <li><a href="{{ url_for('stats') }}">VIEW STATS</a></li>
+                        <li><a href="{{ url_for('logout') }}">LOG OUT</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / END HEADER VERY TOP AREA-->
+
 {% block content %}
 
 {% endblock %}

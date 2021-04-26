@@ -47,22 +47,28 @@
 <!-- END PRELOADER AREA -->
 
 <!-- START HEADER VERY TOP AREA-->
-<div class="header-very-top-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    <li><a href="{{ url_for('home') }}">HOME</a></li>
-                    <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                    <li><a href="#subscribe">SUBSCRIBE</a></li>
-                    <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
-                    <li><a href="{{ url_for('login') }}">LOGIN</a></li>
-                </ul>
+    <div class="header-very-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">HOME</a></li>
+                        <li><a href="{{ url_for('shop') }}">SHOP</a></li>
+                        <!--                        <li><a href="#subscribe">SUBSCRIBE</a></li>-->
+                        {% if not islogin %}
+                        <li><a href="{{ url_for('login') }}">LOGIN</a></li>
+                        <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('profile') }}">PROFILE</a></li>
+                        <li><a href="{{ url_for('stats') }}">VIEW STATS</a></li>
+                        <li><a href="{{ url_for('logout') }}">LOG OUT</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- / END HEADER VERY TOP AREA-->
+    <!-- / END HEADER VERY TOP AREA-->
 
 <!-- START MENU DESIGN AREA -->
 <header class="welcome-area">
@@ -117,7 +123,7 @@
                     <form class="form-inline" action="{{ url_for('search_api') }}" method="POST"
                           enctype="multipart/form-data">
                         <input class="form-control" type="search" name="searchstring" placeholder="Search"
-                               aria-label="Search">
+                               aria-label="Search" required>
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>
                         </button>
                     </form>
@@ -148,26 +154,26 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Full Name</label>
                                 <input type="text" name="username" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Full Name">
+                                       aria-describedby="emailHelp" placeholder="Full Name" minlength="5" maxlength="20" pattern="^[A-Za-z0-9_]{5,20}$" required>
                                 <small id="emailHelp" class="form-text text-muted">5-20 CHARACTERS (ONLY LETTERS &
                                     NUMBERS) </small>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Email">
+                                       aria-describedby="emailHelp" placeholder="Email" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
                                 <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                                       placeholder="Password">
+                                       placeholder="Password" minlength="5" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}$" required>
                                 <small id="emailHelp" class="form-text text-muted">MUST CONTAIN AT LEAST ONE NUMBER ,
                                     ONE UPPER LOWERCASE LETTER AND BETWEEN 5-20 CHARACTERS </small>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1"><a href="term.html">i agree to terms
+                                <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1" required>
+                                <label class="form-check-label" for="exampleCheck1"><a href="{{ url_for('term') }}">i agree to terms
                                     and conditions</a></label>
                             </div>
                             <div class="add-button">

@@ -54,9 +54,15 @@
                     <ul>
                         <li><a href="{{ url_for('home') }}">HOME</a></li>
                         <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                        <li><a href="#subscribe">SUBSCRIBE</a></li>
-                        <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
+                        <!--                        <li><a href="#subscribe">SUBSCRIBE</a></li>-->
+                        {% if not islogin %}
                         <li><a href="{{ url_for('login') }}">LOGIN</a></li>
+                        <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('profile') }}">PROFILE</a></li>
+                        <li><a href="{{ url_for('stats') }}">VIEW STATS</a></li>
+                        <li><a href="{{ url_for('logout') }}">LOG OUT</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -141,17 +147,17 @@
                             <h4 style="color:red;">{{error}}</h4>
                             <form action="{{ url_for('login') }}" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Username</label>
-                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
-                                    <small id="emailHelp" class="form-text text-muted">5-20 Characters</small>
+                                    <label for="exampleInputEmail1">Email</label>
+                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" required>
+{#                                    <small id="emailHelp" class="form-text text-muted">5-20 Characters</small>#}
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                    <small id="emailHelp" class="form-text text-muted">5-20 Characters</small>
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+{#                                    <small id="emailHelp" class="form-text text-muted">5-20 Characters</small>#}
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1" required>
                                     <label class="form-check-label" for="exampleCheck1"><a href="{{ url_for('term') }}">i agree to terms and conditions</a></label>
                                 </div>
                                 <div class="add-button">
@@ -211,10 +217,10 @@
                             <p>Subscribe to our weekly Newsletter and stay tuned.</p>
                             <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
                                 <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
-                                    <input name="email" class="form-control" type="text" id="name" placeholder="your@email.com">
+                                    <input name="email" class="form-control" type="text" id="name" placeholder="your@email.com" required>
                                 </div>
                                 <br />
-                                <input type="submit" value="SUBSCRIBE" btn btn-large read-more " />
+                                <input type="submit" value="SUBSCRIBE" class="btn btn-large read-more " />
                             </form>
                         </div>
                     </div>

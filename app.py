@@ -1,6 +1,7 @@
 import random
 import string
 from datetime import datetime, timedelta
+import os
 from flask import (
     Flask,
     render_template,
@@ -45,8 +46,8 @@ def home():
             {}, db_conn=db, host_url=request.host_url)
         return render_template("index.html", result=response, islogin=islogin)
 
-    except BaseException:
-
+    except BaseException as e:
+        print(e)
         return render_template("error_handlers/error.html")
 
 
@@ -56,9 +57,10 @@ def shop():
         # checking for user login status  if not  then redirecting to login
         # page
         login_data = login_authorize(request, db)
+        islogin = True if login_data["success"] else False
         if not login_data["success"]:
             return redirect(url_for("login"))
-        return render_template("misc/shop.html")
+        return render_template("misc/shop.html", islogin=islogin)
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -145,6 +147,8 @@ def login():
 def profile():
     try:
         login_data = login_authorize(request, db)
+        islogin = True if login_data["success"] else False
+
         # print(login_data)
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
@@ -157,7 +161,7 @@ def profile():
         return render_template(
             "users/myaccount.html",
             name=login_data["name"],
-            result=response)
+            result=response, islogin=islogin)
     except Exception as e:
         print("error----------------------------------", e)
 
@@ -218,6 +222,7 @@ def add_recipes():
         print("from add recipes...")
         # validating user before adding recipe
         login_data = login_authorize(request, db)
+        islogin = True if login_data["success"] else False
         print(login_data)
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
@@ -256,7 +261,7 @@ def add_recipes():
             # print("response---------", response)
             return redirect(url_for("profile"))
 
-        return render_template("recipes/addrecipes.html")
+        return render_template("recipes/addrecipes.html", islogin=islogin)
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -267,6 +272,8 @@ def update_recipe(recipieid):
         print("from update recipe...")
         # validating user before adding recipe
         login_data = login_authorize(request, db)
+        islogin = True if login_data["success"] else False
+
         print(login_data)
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
@@ -317,7 +324,7 @@ def update_recipe(recipieid):
         return render_template(
             "recipes/editrecipe.html",
             result=response,
-            hasresult=True)
+            hasresult=True, islogin=islogin)
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -328,6 +335,7 @@ def delete_recipe(recipieid):
         print("from delete recipe...")
         # validating user before adding recipe
         login_data = login_authorize(request, db)
+
         print(login_data)
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
@@ -349,6 +357,8 @@ def delete_recipe(recipieid):
 def single_recipes(recipieid):
     try:
         login_data = login_authorize(request, db)
+
+
         # if login is unsuccessful redirecting to login page again
         islogin = True if login_data["success"] else False
         # this API only gives one output
@@ -473,10 +483,11 @@ def term():
 def stats():
     try:
         login_data = login_authorize(request, db)
+        islogin = True if login_data["success"] else False
         if not login_data["success"]:
             return redirect(url_for("login"))
         response = get_stats(db, request.host_url)
-        return render_template("misc/stat.html", result=response)
+        return render_template("misc/stat.html", result=response, islogin=islogin)
     except BaseException:
         return render_template("error_handlers/error.html")
 

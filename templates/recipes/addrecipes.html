@@ -4,24 +4,7 @@
 
 
 
-    <!-- START HEADER VERY TOP AREA-->
-    <div class="header-very-top-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul>
-                        <li><a href="{{ url_for('home') }}">HOME</a></li>
-                        <li><a href="{{ url_for('add_recipes') }}">ADD RECIPE</a></li>
-                        <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                        <li><a href="#subscribe">SUBSCRIBE</a></li>
-                        <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
-                        <li><a href="{{ url_for('login') }}">LOGIN</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- / END HEADER VERY TOP AREA-->
+
 
     <!-- START MENU DESIGN AREA -->
     <header class="welcome-area">
@@ -78,7 +61,7 @@
                         <form class="form-inline" action="{{ url_for('search_api') }}" method="POST"
                               enctype="multipart/form-data">
                             <input class="form-control" type="search" name="searchstring" placeholder="Search"
-                                   aria-label="Search">
+                                   aria-label="Search" required>
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
                                     class="fa fa-search"></i>
                             </button>
@@ -108,7 +91,7 @@
                             <div class="form-group">
                                 <label for="formGroupExampleInput">RECIPE NAME </label>
                                 <input type="text" name="recepiename" class="form-control" id="formGroupExampleInput"
-                                       placeholder="">
+                                       placeholder="" required>
                             </div>
 
                             <div class="form-group">
@@ -128,7 +111,7 @@
                                 <label for="formGroupExampleInput">DESCRIPTION </label>
                                 <!--                                <input type="text" name="description" class="form-control" id="formGroupExampleInput" placeholder="">-->
                                 <textarea name="description" class="form-control" id="formGroupExampleInput"
-                                          placeholder=""></textarea>
+                                          placeholder="" required></textarea>
                                 <small class="form-text text-muted">SHORT DESCRIPTION OF MAXIMUM 150 CHARACTERS </small>
                             </div>
 
@@ -150,7 +133,7 @@
                                 <label for="formGroupExampleInput">SERVINGS </label>
                                 <!--                                <input type="text" name="servings" class="form-control" id="formGroupExampleInput" placeholder="">-->
                                 <textarea name="servings" class="form-control" id="formGroupExampleInput"
-                                          placeholder=""></textarea>
+                                          placeholder="" required></textarea>
                                 <small class="form-text text-muted">EXAMPLE: 4</small>
                             </div>
 
@@ -158,14 +141,14 @@
                                 <label for="formGroupExampleInput">PREPARATION TIME </label>
                                 <input type="text" name="preparationtime" class="form-control"
                                        id="formGroupExampleInput"
-                                       placeholder="">
+                                       placeholder="" required>
                                 <small class="form-text text-muted">EXAMPLE 1 HOUR 40 MINUTES</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput">COOKING TIME </label>
                                 <input type="text" name="cookingtime" class="form-control" id="formGroupExampleInput"
-                                       placeholder="">
+                                       placeholder="" required>
                                 <small class="form-text text-muted">EXAMPLE 1 HOUR 40 MINUTES </small>
                             </div>
 
@@ -173,7 +156,7 @@
                                 <label for="formGroupExampleInput">INGREDIENTS </label>
                                 <!--                                <input type="text" name="ingredients" class="form-control" id="formGroupExampleInput" placeholder="">-->
                                 <textarea name="ingredients" class="form-control" id="formGroupExampleInput"
-                                          placeholder=""></textarea>
+                                          placeholder="" required></textarea>
                                 <small class="form-text text-muted">WRITE EACH INGREDIENT IN A NEW LINE </small>
                             </div>
 
@@ -182,7 +165,7 @@
                                 <label for="formGroupExampleInput">INSTRUCTIONS </label>
                                 <!--                                <input type="text" name="instructions" class="form-control" id="formGroupExampleInput" placeholder="">-->
                                 <textarea name="instructions" class="form-control" id="formGroupExampleInput"
-                                          placeholder=""></textarea>
+                                          placeholder="" required></textarea>
                                 <small class="form-text text-muted">WRITE EACH INSTRUCTION IN A NEW LINE </small>
                             </div>
 
@@ -190,7 +173,7 @@
                                 <label for="formGroupExampleInput">TIPS </label>
                                 <!--                                <input type="text" name="tips" class="form-control" id="formGroupExampleInput" placeholder="">-->
                                 <textarea name="tips" class="form-control" id="formGroupExampleInput"
-                                          placeholder=""></textarea>
+                                          placeholder="" required></textarea>
                                 <small class="form-text text-muted">WRITE EACH TIP IN A NEW LINE </small>
                             </div>
 
@@ -241,7 +224,7 @@
                             <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
                                 <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
                                     <input name="email" class="form-control" type="text" id="name"
-                                           placeholder="your@email.com">
+                                           placeholder="your@email.com" required>
                                 </div>
                                 <br/>
                                 <input type="submit" value="SUBSCRIBE" class="btn btn-large read-more"/>

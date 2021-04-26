@@ -3,23 +3,7 @@
 {% block content %}
 
 
-<!-- START HEADER VERY TOP AREA-->
-<div class="header-very-top-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <ul>
-                    <li><a href="{{ url_for('home') }}">HOME</a></li>
-                    <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                    <li><a href="#subscribe">SUBSCRIBE</a></li>
-                    <li><a href="{{ url_for('signup') }}">SIGNUP</a></li>
-                    <li><a href="{{ url_for('login') }}">LOGIN</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- / END HEADER VERY TOP AREA-->
+
 
 <!-- START MENU DESIGN AREA -->
 <header class="welcome-area">
@@ -74,7 +58,7 @@
                     <form class="form-inline" action="{{ url_for('search_api') }}" method="POST"
                           enctype="multipart/form-data">
                         <input class="form-control" type="search" name="searchstring" placeholder="Search"
-                               aria-label="Search">
+                               aria-label="Search" required>
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>
                         </button>
                     </form>
@@ -92,8 +76,8 @@
             <div class="col-md-12">
                 <div class="section-title">
                     <h2>{{ result.recipeName }}</h2>
-                    <p>Created By : {{ result.username }} <br> On {{ result.createdOn }} At Time In
-                        category: {{ result.category }}</p>
+                    <p>Created By : {{ result.username }} <br> In
+                        Category: {{ result.category }}</p>
                 </div>
             </div>
         </div>
@@ -231,7 +215,7 @@
                         <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
                             <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
                                 <input name="email" class="form-control" type="text" id="name"
-                                       placeholder="your@email.com">
+                                       placeholder="your@email.com" required>
                             </div>
                             <br/>
                             <input type="submit" value="SUBSCRIBE" class="btn btn-large read-more"/>
