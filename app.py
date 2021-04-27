@@ -56,11 +56,7 @@ def shop():
     try:
         # checking for user login status  if not  then redirecting to login
         # page
-        login_data = login_authorize(request, db)
-        islogin = True if login_data["success"] else False
-        if not login_data["success"]:
-            return redirect(url_for("login"))
-        return render_template("misc/shop.html", islogin=islogin)
+        return render_template("misc/shop.html")
     except BaseException:
         return render_template("error_handlers/error.html")
 
