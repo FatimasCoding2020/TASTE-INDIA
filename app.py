@@ -27,8 +27,10 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 IMAGE_DIR = os.path.join(APP_ROOT, "static/uploaded_images")
 
 
-# generating random string
-def randstr():
+def random_str():
+    """
+    Generates random string
+    """
     return "".join(
         random.choice(
             string.ascii_lowercase +
@@ -37,14 +39,16 @@ def randstr():
 
 @app.route("/", methods=["GET"])
 def home():
+    """
+    Home page view
+    """
     try:
-        print("_______________________________", request.host_url)
         login_data = login_authorize(request, db)
         # if login is unsuccessful redirecting to login page again
-        islogin = True if login_data["success"] else False
+        is_login = True if login_data["success"] else False
         response = all_recipe_controller_home(
             {}, db_conn=db, host_url=request.host_url)
-        return render_template("index.html", result=response, islogin=islogin)
+        return render_template("index.html", result=response, islogin=is_login)
 
     except BaseException as e:
         print(e)
@@ -53,9 +57,10 @@ def home():
 
 @app.route("/shop")
 def shop():
+    """
+    Shop page view
+    """
     try:
-        # checking for user login status  if not  then redirecting to login
-        # page
         return render_template("misc/shop.html")
     except BaseException:
         return render_template("error_handlers/error.html")
@@ -63,6 +68,9 @@ def shop():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    """
+    Sign up page view
+    """
     try:
         if request.method == "POST":
             checkbox = (request.form.get("checkbox")
@@ -79,7 +87,6 @@ def signup():
                 creadedOn=datetime.now(),
             )
             response = signup_controller(payload=payload, db_conn=db)
-            print("response----------------------------", response)
             if response["success"]:
                 return redirect(url_for("login"))
             else:
@@ -93,6 +100,9 @@ def signup():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Login page view
+    """
     try:
         if request.method == "POST":
             checkbox = (request.form.get("checkbox")
@@ -102,17 +112,14 @@ def login():
                 error = "Please select terms & condition and proceed"
                 return render_template("users/login.html", error=error)
             # getting payload from login form
-            print(request.form)
             payload = dict(
                 email=request.form["email"],
                 password=request.form["password"],
             )
             # verifying the user login
             response = login_controller(payload, db)
-            print("user login verified", response)
             if response["success"]:
                 # creating the JWT token for user session
-                print("creating JWT token")
                 encode = jwt.encode(
                     {
                         "iat": datetime.now(),
@@ -122,11 +129,8 @@ def login():
                     "SECRET",
                     algorithm="HS256",
                 )
-                # print("encode--------------------",encode)
+
                 resp = make_response(redirect(url_for("profile")))
-                # token = str(encode).split("'")[1]
-                print("token---------------", encode)
-                # setting cookie using lofin token
                 resp.set_cookie("logintoken", encode)
                 return resp
             else:
@@ -135,7 +139,7 @@ def login():
 
         return render_template("users/login.html")
     except Exception as e:
-        print("error ------------------", e)
+        print("error: ", e)
         return render_template("error_handlers/error.html")
 
 
@@ -143,9 +147,8 @@ def login():
 def profile():
     try:
         login_data = login_authorize(request, db)
-        islogin = True if login_data["success"] else False
+        is_login = True if login_data["success"] else False
 
-        # print(login_data)
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
@@ -153,17 +156,20 @@ def profile():
         payload_filter = {"userId": login_data["_id"]}
         response = all_recipe_controller(
             payload_filter, db_conn=db, host_url=request.host_url)
-        print("response---", response)
+
         return render_template(
             "users/myaccount.html",
             name=login_data["name"],
-            result=response, islogin=islogin)
+            result=response, islogin=is_login)
     except Exception as e:
-        print("error----------------------------------", e)
+        print("error: ", e)
 
 
 @app.route("/ratings/<recipieid>/<rating>")
 def add_rating(recipieid, rating):
+    """
+    The add rating for a passed recipe id
+    """
     login_data = login_authorize(request, db)
     # if login is unsuccessful redirecting to login page again
     if not login_data["success"]:
@@ -172,12 +178,14 @@ def add_rating(recipieid, rating):
     query = {"_id": ObjectId(recipieid)}
     update = dict(ratings=min(int(rating), 6))
     db["recipes"].update_one(query, {"$set": update})
-    print("ratings", rating)
     return redirect(url_for("profile"))
 
 
 @app.route("/favourites/<recipieid>/<favourite>")
 def add_to_favourite(recipieid, favourite):
+    """
+    Add a passed recipe id to favourite
+    """
     login_data = login_authorize(request, db)
     # if login is unsuccessful redirecting to login page again
     if not login_data["success"]:
@@ -186,12 +194,14 @@ def add_to_favourite(recipieid, favourite):
     query = {"_id": ObjectId(recipieid)}
     update = dict(isFavourate={"0": False, "1": True}[str(favourite)])
     db["recipes"].update_one(query, {"$set": update})
-    print("ratings", update)
     return redirect(url_for("profile"))
 
 
 @app.route("/logout")
 def logout():
+    """
+    Logout page view
+    """
     try:
         # expiring token for logout
         resp = make_response(redirect(url_for("login")))
@@ -203,10 +213,12 @@ def logout():
 
 @app.route("/recipes", methods=["GET", "POST"])
 def recipes():
+    """
+    The view to display all the recipes
+    """
     try:
         response = all_recipe_controller(
             {}, db_conn=db, host_url=request.host_url)
-        # print("response :", response)
         return render_template("recipes/recipes.html", result=response, hasresult=True)
     except BaseException:
         return render_template("error_handlers/error.html")
@@ -214,28 +226,25 @@ def recipes():
 
 @app.route("/addrecipes", methods=["GET", "POST"])
 def add_recipes():
+    """
+    The view to add a new recipe
+    """
     try:
-        print("from add recipes...")
         # validating user before adding recipe
         login_data = login_authorize(request, db)
-        islogin = True if login_data["success"] else False
-        print(login_data)
+        is_login = True if login_data["success"] else False
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
         # we user is logged in reading user input from form
         if request.method == "POST":
-            # reading the imade file
             image = request.files["imagefile"]
-            # reading image url
             imagelink = request.form.get("imageurl")
-            # when image filename is available saving the uploaded image file
-            # to /static/uploaded_images/ directory
+
             if len(image.filename) != 0:
-                image_file = secure_filename(randstr() + "-" + image.filename)
+                image_file = secure_filename(random_str() + "-" + image.filename)
                 image.save(os.path.join(IMAGE_DIR, image_file))
                 imagelink = "/static/uploaded_images/" + str(image_file)
-            # creating payload dictonary from form to save to database
             payload = dict(
                 recipeName=request.form.get("recepiename", None),
                 category=request.form.getlist("category", None),
@@ -254,23 +263,23 @@ def add_recipes():
             )
             response = add_recipe_controller(payload=payload, db_conn=db)
 
-            # print("response---------", response)
             return redirect(url_for("profile"))
 
-        return render_template("recipes/addrecipes.html", islogin=islogin)
+        return render_template("recipes/addrecipes.html", islogin=is_login)
     except BaseException:
         return render_template("error_handlers/error.html")
 
 
 @app.route("/updaterecipe/<recipieid>", methods=["GET", "POST"])
 def update_recipe(recipieid):
+    """
+    The view to update a recipe
+    """
     try:
-        print("from update recipe...")
         # validating user before adding recipe
         login_data = login_authorize(request, db)
-        islogin = True if login_data["success"] else False
+        is_login = True if login_data["success"] else False
 
-        print(login_data)
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
@@ -291,10 +300,8 @@ def update_recipe(recipieid):
                 if "static" in imagelink
                 else imagelink
             )
-            # when image filename is available saving the uploaded image file
-            # to /static/uploaded_images/ directory
             if len(image.filename) != 0:
-                image_file = secure_filename(randstr() + "-" + image.filename)
+                image_file = secure_filename(random_str() + "-" + image.filename)
                 image.save(os.path.join(IMAGE_DIR, image_file))
                 imagelink = "/static/uploaded_images/" + str(image_file)
             query = {"_id": ObjectId(recipieid)}
@@ -314,36 +321,34 @@ def update_recipe(recipieid):
                 isFavourate=request.form.get("isFavourate", None),
             )
             db["recipes"].update_one(query, {"$set": update})
-            print("Recipe updated successfully!")
             return redirect(url_for("profile"))
 
         return render_template(
             "recipes/editrecipe.html",
             result=response,
-            hasresult=True, islogin=islogin)
+            hasresult=True, islogin=is_login)
     except BaseException:
         return render_template("error_handlers/error.html")
 
 
 @app.route("/deleterecipe/<recipieid>", methods=["GET"])
 def delete_recipe(recipieid):
+    """
+    The view to delete a recipe
+    """
     try:
-        print("from delete recipe...")
         # validating user before adding recipe
         login_data = login_authorize(request, db)
 
-        print(login_data)
         # if login is unsuccessful redirecting to login page again
         if not login_data["success"]:
             return redirect(url_for("login"))
         directory = os.getcwd()
         response = db["recipes"].find_one({"_id": ObjectId(recipieid)})
         db["recipes"].delete_one({"_id": ObjectId(recipieid)})
-        print("image url -------", response["imageUrl"])
         if os.path.exists(directory + response["imageUrl"]):
             os.remove(directory + response["imageUrl"])
 
-        print("Recipe deleted successfully!")
         return redirect(url_for("profile"))
     except BaseException:
         return render_template("error_handlers/error.html")
@@ -351,9 +356,11 @@ def delete_recipe(recipieid):
 
 @app.route("/single_recipes/<recipieid>")
 def single_recipes(recipieid):
+    """
+    The view to view the details of a recipe
+    """
     try:
         login_data = login_authorize(request, db)
-
 
         # if login is unsuccessful redirecting to login page again
         islogin = True if login_data["success"] else False
@@ -364,7 +371,6 @@ def single_recipes(recipieid):
         if islogin:
             islogin = True if (
                     response["userid"] == login_data["_id"]) else False
-        # print("response :", response)
         response["username"] = get_user_name(response["userid"], db)
 
         return render_template(
@@ -373,16 +379,15 @@ def single_recipes(recipieid):
             hasresult=True,
             islogin=islogin)
     except Exception as e:
-        print("Error-------------", e)
+        print("Error: ", e)
         return render_template("error_handlers/error.html")
 
 
-# Note: below APIs for category filtering and same logic is used
-# 1. user login status is checked if not logged,
-# list out all  recipes on the category
-# 2.else list out the recipes owned by users
 @app.route("/rice")
 def rice():
+    """
+    The view for the rice category
+    """
     try:
         response = get_category_recipe(
             {"category": "RICE"}, db_conn=db, host_url=request.host_url)
@@ -394,6 +399,9 @@ def rice():
 
 @app.route("/vegetarian")
 def vegetarian():
+    """
+    The view for the vegetarian category
+    """
     try:
         response = get_category_recipe(
             {"category": "VEGETARIAN"}, db_conn=db, host_url=request.host_url)
@@ -407,6 +415,9 @@ def vegetarian():
 
 @app.route("/nonvegetarian")
 def non_vegetarian():
+    """
+    The view for the non-vegetarian category
+    """
     try:
 
         response = get_category_recipe(
@@ -423,6 +434,9 @@ def non_vegetarian():
 
 @app.route("/desserts")
 def desserts():
+    """
+    The view for the desserts category
+    """
     try:
         response = get_category_recipe(
             {"category": "DESSERTS"}, db_conn=db, host_url=request.host_url)
@@ -436,6 +450,9 @@ def desserts():
 
 @app.route("/snacks")
 def snacks():
+    """
+    The view for the snacks category
+    """
     try:
 
         response = get_category_recipe(
@@ -447,6 +464,9 @@ def snacks():
 
 @app.route("/drinks")
 def drinks():
+    """
+    The view for the desserts category
+    """
     try:
         response = get_category_recipe(
             {"category": "DRINKS"}, db_conn=db, host_url=request.host_url)
@@ -457,13 +477,16 @@ def drinks():
 
 @app.route("/spicepantry")
 def spicepentry():
+    """
+    The view for the spice pantry category
+    """
     try:
         response = get_category_recipe(
             {
                 "category": "SPICE-PANTRY"
             }, db_conn=db, host_url=request.host_url)
         return render_template(
-            "categories/spicepentry.html",
+            "categories/spicepantry.html",
             result=response,
             hasresult=True)
     except BaseException:
@@ -472,11 +495,17 @@ def spicepentry():
 
 @app.route("/term")
 def term():
+    """
+    The view for the terms and conditions page
+    """
     return render_template("misc/term.html")
 
 
 @app.route("/stats")
 def stats():
+    """
+    The view to display the site statistics e.g., no of recipes etc.
+    """
     try:
         login_data = login_authorize(request, db)
         islogin = True if login_data["success"] else False
@@ -488,14 +517,19 @@ def stats():
         return render_template("error_handlers/error.html")
 
 
-# Handling error 404 and displaying relevant web page
 @app.errorhandler(404)
 def not_found_error(error):
+    """
+    The view to handle the 404 errors
+    """
     return render_template("error_handlers/error.html"), 404
 
 
 @app.route("/search", methods=["POST"])
 def search_api():
+    """
+    Then view for the search function
+    """
     if request.method == "POST":
         search_string = request.form.get("searchstring", "")
 
@@ -511,7 +545,6 @@ def search_api():
                 {"instructions": {"$regex": search_string, "$options": "i"}},
             ]
         }
-        print("collection_filter", collection_filter)
         response = db["recipes"].find(collection_filter)
         result = map_response(response, request.host_url)
         is_search = True if len(result) > 0 else False
@@ -521,10 +554,11 @@ def search_api():
             is_search=is_search)
 
 
-# test to insert data to the data base
 @app.route("/subscription", methods=["POST"])
 def subscribe():
-    print("Inside Subscription API")
+    """
+    The view for the subscribtion page
+    """
     try:
         if request.method == 'POST':
             payload = dict(
@@ -545,4 +579,4 @@ def subscribe():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)

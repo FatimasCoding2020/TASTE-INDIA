@@ -3,7 +3,9 @@ import pandas as pd
 
 
 def get_stats(db_conn, host_url):
-    print("from get_stats...")
+    """
+    Function to get the site's stats
+    """
     try:
         # getting user counts
         users_count = db_conn["users"].find({}).count()

@@ -100,7 +100,7 @@
                         </div>
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-left">
-                                <li class="active"><a class="smooth-scroll" href="recipes.html">ALL
+                                <li class="active"><a class="smooth-scroll" href="{{ url_for('recipes') }}">ALL
                                     <div class="ripple-wrapper"></div>
                                 </a>
                                 </li>
@@ -152,7 +152,7 @@
                     <div class="single-account">
                         <form action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Full Name</label>
+                                <label for="exampleInputEmail1">Username</label>
                                 <input type="text" name="username" class="form-control" id="exampleInputEmail1"
                                        aria-describedby="emailHelp" placeholder="Full Name" minlength="5" maxlength="20" pattern="^[A-Za-z0-9_]{5,20}$" required>
                                 <small id="emailHelp" class="form-text text-muted">5-20 CHARACTERS (ONLY LETTERS &

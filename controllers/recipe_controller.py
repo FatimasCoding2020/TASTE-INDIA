@@ -1,9 +1,9 @@
-# functions to add recipe to database
 def add_recipe_controller(payload, db_conn):
+    """
+    Functions to add recipe to database
+    """
     try:
         result = db_conn["recipes"].insert_one(payload)
-        print(result.inserted_id)
-        print(result.acknowledged)
         return {
             "success": True,
             "message": "Recipe created successfully",
@@ -13,11 +13,10 @@ def add_recipe_controller(payload, db_conn):
         return {"success": False, "message": "Error in api: " + str(e)}
 
 
-# function to query all recipe from database
-
 def all_recipe_controller_home(filters, db_conn, host_url):
-    print("from all recipe...")
-    print("filter :", filters)
+    """
+    Function to query all recipe from database
+    """
     try:
         result = db_conn["recipes"].find(
             filters).sort("createdOn", -1).limit(9)
@@ -29,8 +28,9 @@ def all_recipe_controller_home(filters, db_conn, host_url):
 
 
 def all_recipe_controller(filters, db_conn, host_url):
-    print("from all recipe...")
-    print("filter :", filters)
+    """
+    Function to fetch all the recipes
+    """
     try:
         result = db_conn["recipes"].find(filters).sort("createdOn", -1)
         recipe_list = map_response(result, host_url)
@@ -41,10 +41,12 @@ def all_recipe_controller(filters, db_conn, host_url):
 
 
 def map_response(data, host_url):
+    """
+    Function to map the response
+    """
     try:
         result = []
         for d in data:
-            # print("id", str(d['_id']))
             d["ratings"] = 0 if d["ratings"] is None else d["ratings"]
             result.append(
                 {

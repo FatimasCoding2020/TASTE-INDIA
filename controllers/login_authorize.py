@@ -2,8 +2,10 @@ import jwt
 from jwt.exceptions import DecodeError
 
 
-# login  of user is verified by querying by email and id is returned
 def login_authorize(request, db_conn):
+    """
+    Login  of user is verified by querying by email and id is returned
+    """
     try:
         if "Cookie" in request.headers:
             cookies = request.headers["Cookie"]
