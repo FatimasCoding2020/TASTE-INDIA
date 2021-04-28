@@ -106,7 +106,7 @@
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput">DESCRIPTION </label>
-                            <!--                                <input type="text" name="description" class="form-control" id="formGroupExampleInput" placeholder="">-->
+                            <!--<input type="text" name="description" class="form-control" id="formGroupExampleInput" placeholder="">-->
                             <textarea name="description" class="form-control" id="formGroupExampleInput"
                                       placeholder="">{{ result.description }}</textarea>
                             <small class="form-text text-muted">SHORT DESCRIPTION OF MAXIMUM 150 CHARACTERS </small>
@@ -117,9 +117,9 @@
                             <input type="hidden" name="imageurl" value="{{ result.imageUrl }}">
                             <input type="hidden" name="category_default" value="{{ result.category }}">
 
-                            <!--                                <label for="formGroupExampleInput">IMAGE URL (if any)</label>-->
-                            <!--                                <input type="text" name="imageurl" class="form-control" id="formGroupExampleInput" placeholder="">-->
-                            <!--                                <small class="form-text text-muted">PLEASE USE A VALID URL </small>-->
+                            <!--<label for="formGroupExampleInput">IMAGE URL (if any)</label>-->
+                            <!--<input type="text" name="imageurl" class="form-control" id="formGroupExampleInput" placeholder="">-->
+                            <!--<small class="form-text text-muted">PLEASE USE A VALID URL </small>-->
                         </div>
 
                         <div class="form-group">
@@ -131,7 +131,7 @@
 
                         <div class="form-group">
                             <label for="formGroupExampleInput">SERVINGS </label>
-                            <!--                                <input type="text" name="servings" class="form-control" id="formGroupExampleInput" placeholder="">-->
+                            <!--<input type="text" name="servings" class="form-control" id="formGroupExampleInput" placeholder="">-->
                             <textarea name="servings" class="form-control" id="formGroupExampleInput"
                                       placeholder="">{{ result.servings }}</textarea>
                             <small class="form-text text-muted">EXAMPLE: 4</small>
@@ -153,7 +153,7 @@
 
                         <div class="form-group">
                             <label for="formGroupExampleInput">INGREDIENTS </label>
-                            <!--                                <input type="text" name="ingredients" class="form-control" id="formGroupExampleInput" placeholder="">-->
+                            <!--<input type="text" name="ingredients" class="form-control" id="formGroupExampleInput" placeholder="">-->
                             <textarea name="ingredients" class="form-control" id="formGroupExampleInput"
                                       placeholder="">{{ result.ingredients }}</textarea>
                             <small class="form-text text-muted">WRITE EACH INGREDIENT IN A NEW LINE </small>
@@ -162,7 +162,7 @@
 
                         <div class="form-group">
                             <label for="formGroupExampleInput">INSTRUCTIONS </label>
-                            <!--                                <input type="text" name="instructions" class="form-control" id="formGroupExampleInput" placeholder="">-->
+                            <!--<input type="text" name="instructions" class="form-control" id="formGroupExampleInput" placeholder="">-->
                             <textarea name="instructions" class="form-control" id="formGroupExampleInput"
                                       placeholder="">{{ result.instructions }}</textarea>
                             <small class="form-text text-muted">WRITE EACH INSTRUCTION IN A NEW LINE </small>
@@ -170,7 +170,7 @@
 
                         <div class="form-group">
                             <label for="formGroupExampleInput">TIPS </label>
-                            <!--                                <input type="text" name="tips" class="form-control" id="formGroupExampleInput" placeholder="">-->
+                            <!--<input type="text" name="tips" class="form-control" id="formGroupExampleInput" placeholder="">-->
                             <textarea name="tips" class="form-control" id="formGroupExampleInput"
                                       placeholder="">{{ result.tips }}</textarea>
                             <small class="form-text text-muted">WRITE EACH TIP IN A NEW LINE </small>
@@ -203,7 +203,7 @@
                             <li><a href="{{ url_for('home') }}">HOME</a></li>
                             <li><a href="{{ url_for('recipes') }}">ALL RECIPES</a></li>
                             <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                            <li><a href="{{ url_for('login') }}">Login & Add Recipe</a></li>
+                            <li><a href="{{ url_for('login') }}">LOGIN & ADD RECIPES</a></li>
                         </ul>
                     </div>
                 </div>
@@ -212,13 +212,13 @@
             <div class="col-md-3"></div>
             <div class="col-md-3"></div>
 
-            <!-- START NEWSLATTER DESIGN AREA -->
+            <!-- START NEWSLETTER DESIGN AREA -->
             <div class="col-md-3 col-sm-6">
                 <div class="single-footer-top">
                     <div id="subscribe" class="newslatter text-center">
                         <h2>Newsletter</h2>
 
-                        <p>Subscribe to our weekly Newsletter and stay tuned.</p>
+                        <p>Subscribe to our weekly newsletter and stay tuned.</p>
                         <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
                             <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
                                 <input name="email" class="form-control" type="text" id="name"
@@ -230,7 +230,7 @@
                     </div>
                 </div>
             </div>
-            <!-- END NEWSLATTER DESIGN AREA -->
+            <!-- END NEWSLETTER DESIGN AREA -->
 
         </div>
         <!-- START SOCIAL LINKS DESIGN AREA -->

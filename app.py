@@ -532,10 +532,10 @@ def subscribe():
             )
             user_data = db["subscription"].find_one(payload)
             if user_data:
-                message = "Hi, You are already subscribed"
+                message = "Hi, you are already subscribed"
                 return render_template("misc/subscription.html", message=message)
             else:
-                message = "Hi, You are subscribed now"
+                message = "Hi, you are now subscribed"
                 db["subscription"].insert_one(payload)
                 return render_template("misc/subscription.html", message=message)
 

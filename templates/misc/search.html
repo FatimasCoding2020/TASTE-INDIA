@@ -121,7 +121,7 @@
                             <li><a href="{{ url_for('home') }}">HOME</a></li>
                             <li><a href="{{ url_for('recipes') }}">ALL RECIPES</a></li>
                             <li><a href="{{ url_for('shop') }}">SHOP</a></li>
-                            <li><a href="{{ url_for('login') }}">Login & Add Recipe</a></li>
+                            <li><a href="{{ url_for('login') }}">LOGIN & ADD RECIPES</a></li>
                         </ul>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                     <div id="subscribe" class="newslatter text-center">
                         <h2>Newsletter</h2>
 
-                        <p>Subscribe to our weekly Newsletter and stay tuned.</p>
+                        <p>Subscribe to our weekly newsletter and stay tuned.</p>
                         <form action="{{ url_for('subscribe') }}" method="POST" enctype="multipart/form-data">
                             <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
                                 <input name="email" class="form-control" type="text" id="name"
