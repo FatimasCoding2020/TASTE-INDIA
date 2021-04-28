@@ -327,9 +327,9 @@ a.read-more:hover,
     margin-top: 20px;
     text-align: right;
 }
-.ssbuton{
+/*.ssbuton{
     
-}
+}*/
 
 .logo {
     padding-top: 26px;
@@ -525,7 +525,7 @@ a.read-more:hover,
 	text-decoration: underline;
 	padding-bottom: 0px;
 }
-.contact-social {}
+/*.contact-social {}*/
 
 .contact-social ul,
 .footer-menu ul {
@@ -668,18 +668,7 @@ a.read-more:hover,
     font-size: 20px;
     margin-bottom: 40px;
 }
-/*
-.btn-primary {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-    border-radius: 0px;
-    background: #000;
-    color: #fff;
-    padding: 10px 40px;
-    margin-top: 30px;
-}
-*/
+
 label {
     display: inline-block;
     max-width: 100%;
