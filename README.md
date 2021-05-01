@@ -157,3 +157,7 @@ A strategy table describes the user and admin goals between importance and feasi
 
 ![Strategy Table](assets/readme-files/strategy.png)
 
+![Database Schema](assets/readme-files/dbschema.png)
+
+![Structure](assets/readme-files/structure.png)
+
