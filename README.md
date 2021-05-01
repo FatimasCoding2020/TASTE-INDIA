@@ -56,7 +56,7 @@ Taste India is designed to easily navigate and is accessible on all devices.
 
 ***
 
-![Taste India responsive displays](readme-files/responsive.png)
+![Taste India responsive displays](assets/readme-files/responsive.png)
 
 ***
 
