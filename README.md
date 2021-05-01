@@ -13,9 +13,10 @@ Taste India is designed to easily navigate and is accessible on all devices.
 
 **Happy cooking**!
 
-[View the live project here](http://ms3-tasteindia.herokuapp.com/)
+[View the live project here](http://taste-india-app.herokuapp.com/)
 
 </div>
+
 
 
 
@@ -55,13 +56,13 @@ Taste India is designed to easily navigate and is accessible on all devices.
 
 ***
 
-![Taste India responsive displays](readme-files/tasteindia-responsive-displays.png)
+![Taste India responsive displays](readme-files/tasteindia-responsive.png)
 
 ***
 
 ## UX 
 ### Project Goals
-The primary goal of this project is to make a website that is intuitive and easy to navigate and allows users to use the CRUD (create, read, update and delete) functionality for their recipes.This website serves as a platform where users can get inspired to cook traditional Indian recipes and recreate them.The main requirements were to design, develop and implement the website using **HTML**, **CSS**, **JavaScript**, **Python+Flask** and **MongoDB**.The secondary goals are to sell different kitchen tools and recipe books and access the statistics on dashboard which offers insight into daily inputs.
+The primary goal of this project is to make a website that is intuitive and easy to navigate and allows users to use the CRUD (create, read, update and delete) functionality for their recipes.This website serves as a platform where users can get inspiration to cook traditional Indian recipes and recreate them.The main requirements were to design, develop and implement the website using **HTML**, **CSS**, **JavaScript**, **Python+Flask** and **MongoDB**.The secondary goals are to sell different kitchen tools and recipe books and access the statistics on dashboard which offers insight into daily inputs.
 
 
 ### User Stories
