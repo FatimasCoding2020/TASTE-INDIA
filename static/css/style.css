@@ -191,7 +191,7 @@ a.read-more:hover,
 }
 
 .dot1 {
-    background-color: #623BCC;
+    background-color: #c91c23;
 }
 
 .dot2 {
@@ -444,7 +444,7 @@ a.read-more:hover,
     margin: 0;
     width: 100%;
     height: auto;
-    background: #3085a3;
+    background: #ffffff;
     text-align: center;
     cursor: pointer;
 }
