@@ -163,4 +163,6 @@ A strategy table describes the user and admin goals between importance and feasi
 
 ![Structure](assets/readme-files/structure.png)
 
+![Color Palette](assets/readme-files/colorpalette.png)
+
 </div>
