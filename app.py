@@ -219,7 +219,10 @@ def recipes():
     try:
         response = all_recipe_controller(
             {}, db_conn=db, host_url=request.host_url)
-        return render_template("recipes/recipes.html", result=response, hasresult=True)
+        return render_template(
+            "recipes/recipes.html",
+            result=response,
+            hasresult=True)
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -242,7 +245,9 @@ def add_recipes():
             imagelink = request.form.get("imageurl")
 
             if len(image.filename) != 0:
-                image_file = secure_filename(random_str() + "-" + image.filename)
+                image_file = secure_filename(
+                    random_str() + "-" + image.filename
+                )
                 image.save(os.path.join(IMAGE_DIR, image_file))
                 imagelink = "/static/uploaded_images/" + str(image_file)
             payload = dict(
@@ -296,12 +301,14 @@ def update_recipe(recipieid):
             # reading image url
             imagelink = request.form.get("imageurl")
             imagelink = (
-                "/static/uploaded_images/" + str(imagelink).split("/")[-1]
+                "/static/uploaded_images/"+str(imagelink).split("/")[-1]
                 if "static" in imagelink
                 else imagelink
             )
             if len(image.filename) != 0:
-                image_file = secure_filename(random_str() + "-" + image.filename)
+                image_file = secure_filename(
+                    random_str() + "-" + image.filename
+                )
                 image.save(os.path.join(IMAGE_DIR, image_file))
                 imagelink = "/static/uploaded_images/" + str(image_file)
             query = {"_id": ObjectId(recipieid)}
@@ -390,8 +397,15 @@ def rice():
     """
     try:
         response = get_category_recipe(
-            {"category": "RICE"}, db_conn=db, host_url=request.host_url)
-        return render_template("categories/rice.html", result=response, hasresult=True)
+            {"category": "RICE"},
+            db_conn=db,
+            host_url=request.host_url
+        )
+        return render_template(
+            "categories/rice.html",
+            result=response,
+            hasresult=True
+        )
 
     except BaseException:
         return render_template("error_handlers/error.html")
@@ -457,7 +471,11 @@ def snacks():
 
         response = get_category_recipe(
             {"category": "SNACKS"}, db_conn=db, host_url=request.host_url)
-        return render_template("categories/snacks.html", result=response, hasresult=True)
+        return render_template(
+            "categories/snacks.html",
+            result=response,
+            hasresult=True
+        )
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -470,7 +488,11 @@ def drinks():
     try:
         response = get_category_recipe(
             {"category": "DRINKS"}, db_conn=db, host_url=request.host_url)
-        return render_template("categories/drinks.html", result=response, hasresult=True)
+        return render_template(
+            "categories/drinks.html",
+            result=response,
+            hasresult=True
+        )
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -512,7 +534,11 @@ def stats():
         if not login_data["success"]:
             return redirect(url_for("login"))
         response = get_stats(db, request.host_url)
-        return render_template("misc/stat.html", result=response, islogin=islogin)
+        return render_template(
+            "misc/stat.html",
+            result=response,
+            islogin=islogin
+        )
     except BaseException:
         return render_template("error_handlers/error.html")
 
@@ -567,19 +593,22 @@ def subscribe():
             user_data = db["subscription"].find_one(payload)
             if user_data:
                 message = "Hi, you are already subscribed"
-                return render_template("misc/subscription.html", message=message)
+                return render_template(
+                    "misc/subscription.html",
+                    message=message
+                )
             else:
                 message = "Hi, you are now subscribed"
                 db["subscription"].insert_one(payload)
-                return render_template("misc/subscription.html", message=message)
+                return render_template(
+                    "misc/subscription.html",
+                    message=message
+                )
 
     except Exception as e:
         print(e)
         return render_template("error_handlers/error.html")
 
-
-#if __name__ == "__main__":
-    #app.run(host="0.0.0.0", port=5000, debug=True)
 
 if __name__ == "__main__":
     app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)
