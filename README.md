@@ -176,7 +176,7 @@ The information architecture was organized in a **hierarchial tree structure** s
 
 ![Site Map](assets/readme-files/structure.png)
 
-The project has collections in the database. The database structure in MongoDB is as follows: 
+The project has collections in the database. The database structure in **MongoDB** is as follows: 
 
 ![Database Schema](assets/readme-files/dbschema.png)
 
@@ -184,7 +184,7 @@ The project has collections in the database. The database structure in MongoDB i
 
 Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.com/) with providing a positive user experience in mind:
 
-|[Taste India](assets/wireframes/addrecipe.png)|
+|[Taste India](https://github.com/FatimasCoding2020/Taste-India/blob/master/assets/wireframes/addrecipe.png)|
 |[Taste India](assets/wireframes/categories.png)|
 |[Taste India](assets/wireframes/editrecipe.png)|
 |[Taste India](assets/wireframes/home.png)|
@@ -197,7 +197,7 @@ Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.co
 |[Taste India](assets/wireframes/termsconditions.png)|
 
 
-- Welcome Modal:
+- Home Page:
 
      ![Home Page](assets/readme-files/homepage.png)
 
@@ -211,7 +211,7 @@ Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.co
 
 - Subscription Page:
 
-     ![Subscription Page](assets/readme-files/subscription.png)
+     ![Subscription Page](assets/readme-files/subscriptionpage.png)
 
 - Search results Page:
 
