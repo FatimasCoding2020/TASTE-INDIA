@@ -184,18 +184,13 @@ The project has collections in the database. The database structure in **MongoDB
 
 Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.com/) with providing a positive user experience in mind:
 
-[Add Recipe](assets/wireframes/addrecipe.png)|
-|[Categories](assets/wireframes/categories.png)|
-|[Edit Recipe](assets/wireframes/editrecipe.png)|
-|[Home](assets/wireframes/home.png)|
-|[Login](assets/wireframes/login.png)|
-|[My Account](assets/wireframes/myaccount.png)|
-|[Recipe](assets/wireframes/recipe.png)|
-|[Shop](assets/wireframes/shop.png)|
-|[Signup](assets/wireframes/signup.png)|
-|[Spice Pantry](assets/wireframes/spicepantry.png)|
-|[Terms & Conditions](assets/wireframes/termsconditions.png)|
+[Add Recipe](assets/wireframes/addrecipe.png)||[Categories](assets/wireframes/categories.png)||[Edit Recipe](assets/wireframes/editrecipe.png)|
+|[Home](assets/wireframes/home.png)||[Login](assets/wireframes/login.png)||[My Account](assets/wireframes/myaccount.png)|
+|[Recipe](assets/wireframes/recipe.png)||[Shop](assets/wireframes/shop.png)||[Signup](assets/wireframes/signup.png)|
+|[Spice Pantry](assets/wireframes/spicepantry.png)||[Terms & Conditions](assets/wireframes/termsconditions.png)|
 
+
+**Screenshots:**
 
 - Home Page:
 
