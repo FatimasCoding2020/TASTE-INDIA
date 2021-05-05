@@ -11,7 +11,6 @@ The users can create an account to add, edit and delete and can also rate and ad
 
 Taste India is designed to easily navigate and is accessible on all devices. 
 
-**Happy cooking**!
 
 [View the live project here](http://taste-india-app.herokuapp.com/)
 
@@ -19,8 +18,6 @@ Taste India is designed to easily navigate and is accessible on all devices.
 
 
 ## Table of contents
-
-1## Table of contents
 1. [UX](#UX)
     1. [Project Goals](#Project-Goals)
     2. [User Stories](#User-Stories)
@@ -43,6 +40,7 @@ Taste India is designed to easily navigate and is accessible on all devices.
      2. [Media](#Media)
      2. [Code](#Code)
 8. [Acknowledgements](#Acknowledgements)
+9. [Disclaimer](#Disclaimer)
 ***
 
 ***
@@ -245,7 +243,7 @@ Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.co
      - The primary font chosen is [Poppins](https://fonts.google.com/specimen/Poppins). A serif typeface, Poppins is easily readable.
 
 
-### Existing features 
+## Existing features 
 
 #### 1. Design 
 - An attractive and simple layout with consistency.
@@ -410,6 +408,10 @@ Click on **Open app** in the right corner of your Heroku account. The app will o
 - I would like to thank my mentor Precious Ijege for his support and guidance throughout.
 - I would like to thank the instructors of [Code Institute](https://codeinstitute.net/) for the lessons and knowledge.
 - I would like to thank Alan from the Tutor Assistance for the advice about a bug.
+
+
+## Disclaimer
+This project is for educational purposes only.Thanks for visiting.
 
 [Back to top ⇧](#table-of-contents)
 
