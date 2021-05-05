@@ -186,41 +186,40 @@ Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.co
 
 [Add Recipe](assets/wireframes/addrecipe.png)||[Categories](assets/wireframes/categories.png)||[Edit Recipe](assets/wireframes/editrecipe.png)|
 |[Home](assets/wireframes/home.png)||[Login](assets/wireframes/login.png)||[My Account](assets/wireframes/myaccount.png)|
-|[Recipe](assets/wireframes/recipe.png)||[Shop](assets/wireframes/shop.png)||[Signup](assets/wireframes/signup.png)|
-|[Spice Pantry](assets/wireframes/spicepantry.png)||[Terms & Conditions](assets/wireframes/termsconditions.png)|
+|[Recipe](assets/wireframes/recipe.png)||[Shop](assets/wireframes/shop.png)||[Signup](assets/wireframes/signup.png)||[Spice Pantry](assets/wireframes/spicepantry.png)||[Terms & Conditions](assets/wireframes/termsconditions.png)|
 
 
 **Screenshots:**
 
-- Home Page:
+- HOME PAGE:
 
      ![Home Page](assets/readme-files/homepage.png)
 
-- Login Page:
+- LOGIN PAGE:
 
      ![Login Page](assets/readme-files/loginpage.png)
 
-- Signup Page:
+- SIGNUP PAGE:
 
      ![Signup Page](assets/readme-files/signuppage.png)
 
-- Subscription Page:
+- SUBSCRIPTION PAGE:
 
      ![Subscription Page](assets/readme-files/subscriptionpage.png)
 
-- Search results Page:
+- SEARCH RESULTS PAGE:
 
      ![Search results Page](assets/readme-files/searchresultspage.png)
 
-- Add recipe Page:
+- ADD RECIPE PAGE:
 
      ![Add recipe Page](assets/readme-files/addrecipepage.png)
 
-- Delete recipe Page:
+- DELETE RECIPE PAGE:
 
      ![Delete recipe Page](assets/readme-files/deleterecipepage.png)
 
-- Rate and add to favourites Page:
+- RATE & ADD TO FAVOURITES PAGE:
 
      ![Rate and add to favourites Page](assets/readme-files/ratefavoritespage.png)
 
@@ -345,7 +344,7 @@ To make a local clone, follow the following steps.
     - Signup or login to your MongoDB account.
     - Create a cluster and a database.
     - Create four collections in the db: **categories, recipes, subscribers, users.**
-    - Add string values for the collections. See <a href="#ux-architecture">Structure</a> how the database is set up for this project.
+    - Add string values for the collections.
 3. Create the environment variables 
     - Create a .gitignore file in the root directory of the project.
     - Add the env.py file in the .gitignore.
@@ -402,14 +401,14 @@ Click on **Open app** in the right corner of your Heroku account. The app will o
 
 #### Code
 - [Python libraries](https://pypi.org/)
-- [Code](https://stackoverflow.com/)
+- [Stack overflow](https://stackoverflow.com/)
 - [W3Schools: HTML, CSS, JS](https://www.w3schools.com/)
 - [Devdocs: HTML, CSS, JS](https://devdocs.io/)
 
 
 ## Acknowledgements
 - I would like to thank my mentor Precious Ijege for his support and guidance throughout.
-- I would like to thank the instructors of [Code Institute.](https://codeinstitute.net/) for the lessons and knowledge.
+- I would like to thank the instructors of [Code Institute](https://codeinstitute.net/) for the lessons and knowledge.
 - I would like to thank Alan from the Tutor Assistance for the advice about a bug.
 
 [Back to top ⇧](#table-of-contents)
