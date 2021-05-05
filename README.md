@@ -184,17 +184,17 @@ The project has collections in the database. The database structure in **MongoDB
 
 Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.com/) with providing a positive user experience in mind:
 
-|[Taste India](https://github.com/FatimasCoding2020/Taste-India/blob/master/assets/wireframes/addrecipe.png)|
-|[Taste India](assets/wireframes/categories.png)|
-|[Taste India](assets/wireframes/editrecipe.png)|
-|[Taste India](assets/wireframes/home.png)|
-|[Taste India](assets/wireframes/login.png)|
-|[Taste India](assets/wireframes/myaccount.png)|
-|[Taste India](assets/wireframes/recipe.png)|
-|[Taste India](assets/wireframes/shop.png)|
-|[Taste India](assets/wireframes/signup page.png)|
-|[Taste India](assets/wireframes/spicepantry.png)|
-|[Taste India](assets/wireframes/termsconditions.png)|
+|[Add Recipe](wireframes/addrecipe.png)|
+|[Categories](wireframes/categories.png)|
+|[Edit Recipe](wireframes/editrecipe.png)|
+|[Home](wireframes/home.png)|
+|[Login](wireframes/login.png)|
+|[My Account](wireframes/myaccount.png)|
+|[Recipe](wireframes/recipe.png)|
+|[Shop](wireframes/shop.png)|
+|[Signup](wireframes/signup.png)|
+|[Spice Pantry](wireframes/spicepantry.png)|
+|[Terms & Conditions](wireframes/termsconditions.png)|
 
 
 - Home Page:
