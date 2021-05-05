@@ -40,7 +40,7 @@ Taste India is designed to easily navigate and is accessible on all devices.
      4. [Heroku Deployment](#Heroku-Deployment)
 7. [Credits](#Credits)
      1. [Recipes](#Recipes)
-     2. [Media] (#Media)
+     2. [Media](#Media)
      2. [Code](#Code)
 8. [Acknowledgements](#Acknowledgements)
 ***
@@ -175,46 +175,59 @@ A scope identifies aligning features with strategy:
 The information architecture was organized in a **hierarchial tree structure** so users could navigate through the site with efficiency
 
 ![Site Map](assets/readme-files/structure.png)
+
+The project has collections in the database. The database structure in MongoDB is as follows: 
+
 ![Database Schema](assets/readme-files/dbschema.png)
 
 <strong>4. <u>Skeleton</u></strong>
 
 Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.com/) with providing a positive user experience in mind:
 
-|[Taste India](assets/wireframes)|
+|[Taste India](assets/wireframes/addrecipe.png)|
+|[Taste India](assets/wireframes/categories.png)|
+|[Taste India](assets/wireframes/editrecipe.png)|
+|[Taste India](assets/wireframes/home.png)|
+|[Taste India](assets/wireframes/login.png)|
+|[Taste India](assets/wireframes/myaccount.png)|
+|[Taste India](assets/wireframes/recipe.png)|
+|[Taste India](assets/wireframes/shop.png)|
+|[Taste India](assets/wireframes/signup page.png)|
+|[Taste India](assets/wireframes/spicepantry.png)|
+|[Taste India](assets/wireframes/termsconditions.png)|
 
 
 - Welcome Modal:
 
-     ![Home Page](assets/readme-files/homepage.png “Home Page Screenshot)
+     ![Home Page](assets/readme-files/homepage.png)
 
 - Login Page:
 
-     ![Login Page](assets/readme-files/loginpage.png “Login Page Screenshot)
+     ![Login Page](assets/readme-files/loginpage.png)
 
 - Signup Page:
 
-     ![Signup Page](assets/readme-files/signuppage.png “Signup Page Screenshot)
+     ![Signup Page](assets/readme-files/signuppage.png)
 
 - Subscription Page:
 
-     ![Subscription Page](assets/readme-files/subscription.png “Subscription Page Screenshot)
+     ![Subscription Page](assets/readme-files/subscription.png)
 
 - Search results Page:
 
-     ![Search results Page](assets/readme-files/searchresultspage.png “Search results Page Screenshot)
+     ![Search results Page](assets/readme-files/searchresultspage.png)
 
 - Add recipe Page:
 
-     ![Add recipe Page](assets/readme-files/addrecipepage.png “Add recipe Page Screenshot)
+     ![Add recipe Page](assets/readme-files/addrecipepage.png)
 
 - Delete recipe Page:
 
-     ![Delete recipe Page](assets/readme-files/deleterecipepage.png “Delete recipe Page Screenshot)
+     ![Delete recipe Page](assets/readme-files/deleterecipepage.png)
 
 - Rate and add to favourites Page:
 
-     ![Rate and add to favourites Page](assets/readme-files/ratefavoritespage.png “Rate and add to favourites Page Screenshot)
+     ![Rate and add to favourites Page](assets/readme-files/ratefavoritespage.png)
 
 
 <strong>5. <u>Surface</u></strong>
@@ -236,9 +249,6 @@ Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.co
 - <strong>Typography</strong>
 
      - The primary font chosen is [Poppins](https://fonts.google.com/specimen/Poppins). A serif typeface, Poppins is easily readable.
-
-
-[Back to top ⇧](#table-of-contents)
 
 
 ### Existing features 
@@ -318,7 +328,7 @@ Wireframe mockups were created in a [Balsamiq Workspace](https://www.balsamiq.co
 
 ## Testing
 
-Testing information can be found in a separate testing [file](TESTING.md "Link to testing file")
+The testing process can be found [here](TESTING.md).
 
 ## Deployment
 
